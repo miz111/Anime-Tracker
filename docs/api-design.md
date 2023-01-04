@@ -307,3 +307,59 @@ TBD: Might change to mal_id
       true
     }
     ```
+
+## Anime Details List
+
+* Endpoint path: /anime 
+* Endpoint method: GET
+
+* Headers:
+* Authorization: Bearer token
+
+* Response: A list of Anime Details 
+* Response shape (JSON):
+
+    ```
+    {
+      “anime”: [
+        {
+          "title": string,
+          ”synopsis”: string,
+          "image_url": string html,
+          “rating”: integer,
+          “streaming_platform”: string,
+          “status”: boolean
+        }
+      ]
+    }
+    ```
+
+
+
+## Search List
+
+* Endpoint path: /search
+* Endpoint method: GET
+* Query parameters:
+  * tv, Movie, ova, special
+
+* Headers:
+  * Authorization: Bearer token
+
+* Response: A list of Searches
+* Response shape (JSON):
+
+    ```
+    {
+      “Searches”: [
+        {
+          “title”: string,
+          "text": string,
+          “rating”: integer,
+          “length”: integer,
+          “released_year”: string,
+          “status”: boolean
+        }
+      ]
+    }
+    ```
