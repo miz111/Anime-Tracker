@@ -1,5 +1,22 @@
-# volumes:
+volumes:
+  mongo-data:
+    external: true
+    
 services:
+  mongo:
+    image: mongo:6
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+  user_watchlist:
+    build:
+      context: user_watchlist
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8090:8000
+      
   fastapi:
     build:
       context: sample_service
