@@ -23,10 +23,6 @@ services:
       DATABASE_URL: mongodb://root:pass@mongo
       DATABASE_NAME: mongo
       WAIT_HOSTS: mongo:27017
-      # MONGO_USER: root
-      # MONGO_PASSWORD: pass
-      # MONGO_HOST: mongo
-      # MONGO_DATABASE: accounts
 
   user_favorites:
     build:
@@ -40,10 +36,6 @@ services:
       DATABASE_URL: mongodb://root:pass@mongo
       DATABASE_NAME: mongo
       WAIT_HOSTS: mongo:27017
-      # MONGO_USER: root
-      # MONGO_PASSWORD: pass
-      # MONGO_HOST: mongo
-      # MONGO_DATABASE: favorites
 
   user_watchlist:
     build:
@@ -57,10 +49,6 @@ services:
       DATABASE_URL: mongodb://root:pass@mongo
       DATABASE_NAME: mongo
       WAIT_HOSTS: mongo:27017
-      # MONGO_USER: root
-      # MONGO_PASSWORD: pass
-      # MONGO_HOST: mongo
-      # MONGO_DATABASE: watchlist
 
   mongo-express:
     image: mongo-express:latest
@@ -73,19 +61,6 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: pass
       ME_CONFIG_MONGODB_URL: mongodb://root:pass@mongo:27017/
     restart: always
-
-  # sample_service:
-  #   build:
-  #     context: ./sample_service
-  #     dockerfile: ./Dockerfile.dev
-  #   ports:
-  #     - "8000:8000"
-  #   volumes:
-  #     - ./sample_service:/app
-  #   environment:
-  #     DATABASE_URL: mongodb://root:pass@mongo
-  #     DATABASE_NAME: mongo
-  #     WAIT_HOSTS: mongo:27017
 
   ghi:
     image: node:lts-bullseye
