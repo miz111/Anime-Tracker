@@ -11,40 +11,40 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: pass
 
-  user_accounts:
+  accounts:
     build:
-      context: user_accounts
+      context: accounts
       dockerfile: Dockerfile.dev
     ports:
       - "8080:8000"
     volumes:
-      - ./user_accounts:/app
+      - ./accounts:/app
     environment:
       DATABASE_URL: mongodb://root:pass@mongo
       DATABASE_NAME: mongo
       WAIT_HOSTS: mongo:27017
 
-  user_favorites:
+  favorites:
     build:
-      context: user_favorites
+      context: favorites
       dockerfile: Dockerfile.dev
     ports:
       - "8090:8000"
     volumes:
-      - ./user_favorites:/app
+      - ./favorites:/app
     environment:
       DATABASE_URL: mongodb://root:pass@mongo
       DATABASE_NAME: mongo
       WAIT_HOSTS: mongo:27017
 
-  user_watchlist:
+  watchlists:
     build:
-      context: user_watchlist
+      context: watchlists
       dockerfile: Dockerfile.dev
     ports:
       - "8070:8000"
     volumes:
-      - ./user_watchlist:/app
+      - ./watchlists:/app
     environment:
       DATABASE_URL: mongodb://root:pass@mongo
       DATABASE_NAME: mongo
