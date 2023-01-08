@@ -20,3 +20,10 @@ def create_account(
     account_queries: AccountQueries = Depends(),
 ):
     return account_queries.create_account(new_account)
+
+@router.get('/api/accounts/{id}', response_model=AccountOut)
+def get_account(
+    id: str,
+    account_queries: AccountQueries = Depends(),
+):
+    return account_queries.get_account_by_id(id)
