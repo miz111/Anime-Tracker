@@ -3,6 +3,7 @@ import os
 import pymongo
 from bson.objectid import ObjectId
 from datetime import datetime
+from typing import List
 
 
 dbhost = os.environ["MONGOHOST"]
@@ -24,6 +25,9 @@ class FavoriteOut(BaseModel):
     date: datetime
     img_url: str
 
+class FavoritesOut(BaseModel):
+    favorites: List[FavoriteOut]
+
 
 class FavoriteQueries:
     def get_favorite_id(self, favorite_id, owner):
@@ -40,8 +44,8 @@ class FavoriteQueries:
         stuff = data.dict()
         stuff["owner"] = owner
         result = db.favorites.insert_one(stuff)
-        if result.inserted:
-            result = self.get_favorite_id(result.inserted, owner)
+        if result.id:
+            result = self.get_favorite_id(result.id, owner)
             result["id"] = str(result["id"])
             return result
 

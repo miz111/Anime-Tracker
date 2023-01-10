@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      let url = `${process.env.REACT_APP_FAVORITES}/favorites`;
+      let url = `${process.env.REACT_APP_ANIME}/anime`;
       console.log("fastapi url: ", url);
       let response = await fetch(url);
       console.log("------- hello? -------");
