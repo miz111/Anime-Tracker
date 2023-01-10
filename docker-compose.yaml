@@ -33,9 +33,12 @@ services:
     volumes:
       - ./favorites:/app
     environment:
-      DATABASE_URL: mongodb://root:pass@mongo
-      DATABASE_NAME: mongo
-      WAIT_HOSTS: mongo:27017
+      DATABASE_URL: mongodb://root:pass@mongo/favorites
+      MONGOHOST: mongo
+      MONGODATABASE: favorites
+      MONGOUSER: root
+      MONGOPASSWORD: pass
+      SIGNING_KEY: favorites
 
   watchlists:
     build:
@@ -78,4 +81,4 @@ services:
       PUBLIC_URL: http://localhost:3000
       # REACT_APP_ACCOUNTS: http://localhost:8080
       # REACT_APP_WATCHLIST: http://localhost:8070
-      # REACT_APP_FAVORITES: http://localhost:8090
+      REACT_APP_FAVORITES: http://localhost:8090
