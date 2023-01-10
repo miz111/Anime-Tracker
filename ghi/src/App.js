@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage.js";
 import "./App.css";
 
 function App() {
@@ -30,6 +32,11 @@ function App() {
     <div>
       <ErrorNotification error={error} />
       <Construct info={launch_info} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
