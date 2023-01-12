@@ -16,6 +16,8 @@ function HomePage() {
 
   console.log(popularEpisodes[0])
 
+  let test = JSON.stringify(popularEpisodes[0])
+
 
   return (
     <div className="px-4 py-5 my-5 text-center">
@@ -44,9 +46,10 @@ function HomePage() {
                 Left-aligned title explaining these awesome features
               </h3>
               <p className="text-muted">
+                {test}
                 Paragraph of text beneath the heading to explain the heading.
-                We'll add onto it with another sentence and probably just keep
-                going until we run out of words.
+                We will be importing the synopsis from the json data by collecting
+                information by the mal_id
               </p>
               <div className="row">
                 <a href="#" className="btn btn-primary btn-lg justify-content-sm-center">
@@ -67,21 +70,21 @@ function HomePage() {
           <div className="carousel-item active">
             <img
               className="d-block w-100"
-              src="https://di-uploads-pod12.dealerinspire.com/automotiveavenue/uploads/2021/08/header.jpg"
+              src="https:\/\/cdn.myanimelist.net\/images\/anime\/4\/19644l.jpg"
               alt="First slide"
             />
           </div>
           <div className="carousel-item">
             <img
               className="d-block w-100"
-              src="https://gwrench.com/wp-content/uploads/2020/12/VistaCarService.jpg"
+              src="https:\/\/cdn.myanimelist.net\/images\/anime\/13\/17405l.jpg"
               alt="Second slide"
             />
           </div>
           <div className="carousel-item">
             <img
               className="d-block w-100"
-              src="https://cdn.autoversed.com/autoversed/wp-content/uploads/2016/03/shutterstock_294459590-scaled.jpg"
+              src="https:\/\/cdn.myanimelist.net\/images\/anime\/6\/73245l.jpg"
               alt="Third slide"
             />
           </div>
