@@ -1,18 +1,63 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
 
 function HomePage() {
+  const [popularEpisodes, setEpisodes] = useState([]);
+
+  useEffect(() => { 
+    fetch("https://api.jikan.moe/v4/watch/episodes/popular")
+      .then((response) => response.json())
+      .then((data) => {setEpisodes (data.data);
+      })  
+      .catch((error) => console.log("Error", error));
+  }, []);
+
+  console.log(popularEpisodes[0])
+
+
   return (
     <div className="px-4 py-5 my-5 text-center">
       <script src="js/jquery-1.7.1.min.js"></script>
       <script src="js/bootstrap.js"></script>
-      <h1 className="display-5 fw-bold">CarCar</h1>
+      <h1 className="display-5 fw-bold">Ani-Reactor</h1>
       <div className="col-lg-6 mx-auto">
-        <p className="lead mb-4">
-          The premiere solution for automobile dealership management!
-        </p>
+        <p className="lead mb-4">Find your new favorite show here!</p>
       </div>
+      <div className="container px-4 py-5">
+        <h2 className="pb-2 border-bottom">GANG</h2>
+        <div>
+          <div
+            className=" row row-cols-1 row-cols-md-2 
+          align-items-md-center g-5 py-5"
+          >
+            <div className="">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg"
+                alt="test"
+                width="300"
+              ></img>
+            </div>
+            <div className="col d-flex flex-column align-items-start gap-2">
+              <h3 className="fw-bold">
+                Left-aligned title explaining these awesome features
+              </h3>
+              <p className="text-muted">
+                Paragraph of text beneath the heading to explain the heading.
+                We'll add onto it with another sentence and probably just keep
+                going until we run out of words.
+              </p>
+              <div className="row">
+                <a href="#" className="btn btn-primary btn-lg justify-content-sm-center">
+                  Primary button
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div
         id="carouselExampleControls"
         className="carousel slide"
