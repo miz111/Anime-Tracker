@@ -1,6 +1,32 @@
-## 01/07/2023
 
-Wrote backend for my favorite service. I feel like I am on the right track but
+## 01/11/23
+
+Jess, Cheng, and I decided to scrap our project due to wasted time trying to figure out how to link databases together. Instructor gave us an example project that showed mongo databases linked together. However, he shipped us a broken project.......... Most of the endpoints aren't working. So that is why we decided to scrap our project and redo it using Postgre.. SUPER FRUSTRATING DUDE.
+
+
+## 01/10/23
+
+We have our authentication down and it finally worked. However our blockers as of now is trying to link our databases together.
+
+
+## 01/09/23
+
+Jess, Cheng, and I got our post to work but we are still trying to figure out how to link our databases together...
+
+
+## 01/08/23
+
+Today we are still trying to link up our multiple databases together but still no luck. We are currently researching the topic.
+
+
+## 01/07/23
+
+Cheng, Jess, and I started writing out our backend to try to get our respective services to post. So far a lot of progress has been made.
+
+
+## 01/07/23
+
+Wrote backend for my favorite service. I feel like I am on the right track but there are still some blockers regarding linking mongoDB together.
 
 
 ## 01/05/23
