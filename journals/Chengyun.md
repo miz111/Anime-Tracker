@@ -76,3 +76,8 @@ Since we have clarified the relationship as one to many, each account may leads 
   Jess, Jordan and I have been trying to apply the code and adjust the database setup to the demo.
   However, the account authentication still did not really work.
   We decided to save the code we have built for now and give the SQL a try.
+
+  #### Date: 2023-01-12
+  ` Focus on project setup: Setting up the project with postgres and rebuild from beginning.
+  Jess set up the postgres with dockers. We all help with checking the update.
+  Alvi review the merge request, so we now have a new main branch and everyone will work on the new branch.
