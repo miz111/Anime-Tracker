@@ -1,130 +1,87 @@
 volumes:
-  example-node-modules:
+  postgres-data:
     external: true
-  mongo-account-data:
-    external: true
-  mongo-anime-data:
+  pg-admin:
     external: true
 
 services:
-  mongo-accounts:
-    image: mongo:5
+  pg-admin:
+    image: dpage/pgadmin4
     volumes:
-      - ./setup/mongodb/accounts:/docker-entrypoint-initdb.d
-      - mongo-account-data:/data/db
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: pass
+      PGADMIN_DEFAULT_EMAIL: anime@email.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+      PGADMIN_DISABLE_POSTFIX: 1
 
-  mongo-anime:
-    image: mongo:5
+  postgres:
+    build:
+      context: ./relational-data
+      dockerfile: ./Dockerfile.dev
     volumes:
-      - ./setup/mongodb/anime:/docker-entrypoint-initdb.d
-      - mongo-anime-data:/data/db
+      - postgres-data:/var/lib/postgresql/data
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: pass
-
-  mongo-express-accounts:
-    build:
-      context: setup/mongo-express
-      dockerfile: Dockerfile.dev
-    # image: mongo-express:latest
+      - POSTGRES_MULTIPLE_DATABASES=accounts, favorites, watchlists
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=pass
     ports:
-      - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_SERVER: mongo-accounts
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
-    restart: always
-    # WAIT_HOSTS: mongo-accounts:27017
-    # WAIT_BEFORE: 5
-    # WAIT_TIMEOUT: 60
-
-  mongo-express-anime:
-    build:
-      context: setup/mongo-express
-      dockerfile: Dockerfile.dev
-    # image: mongo-express:latest
-    ports:
-      - "8082:8081"
-    environment:
-      ME_CONFIG_MONGODB_SERVER: mongo-anime
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
-    restart:
-      always
-      # WAIT_HOSTS: mongo-accounts:27017
-      # WAIT_BEFORE: 5
-      # WAIT_TIMEOUT: 60
+      - 15432:5432
 
   accounts:
     build:
-      context: accounts
-      dockerfile: Dockerfile.dev
+      context: ./accounts
+      dockerfile: ./Dockerfile.dev
     ports:
-      - "8080:8000"
+      - "8000:8000"
     volumes:
       - ./accounts:/app
     environment:
-      DATABASE_URL: mongodb://root:pass@mongo-accounts/admin
-      MONGO_HOST: mongo
-      MONGO_DATABASE: accounts
-      MONGO_USER: root
-      MONGO_PASSWORD: pass
-      # MONGO_HOST: mongo
-      # MONGO_DATABASE: accounts
-      # MONGO_USER: root
-      # MONGO_PASSWORD: pass - ABOVE CODE MIGHT NOT BE NEEDED.
-      SIGNING_KEY: KcToU9kvT68n3u40ocXqPk2KwQGhxDGZdz92AgjWPN0
-      # WAIT_HOSTS: mongo-accounts:27017
-      # WAIT_BEFORE: 5
-      # WAIT_TIMEOUT: 60
+      DATABASE_URL: postgresql://accounts:password@postgres/accounts
+      WAIT_HOSTS:
+        postgres:5432
+        # SIGNING_KEY:${SIGNING_KEY}
 
-  anime:
+  favorites:
     build:
-      context: anime
-      dockerfile: Dockerfile.dev
+      context: ./favorites
+      dockerfile: ./Dockerfile.dev
     ports:
       - "8090:8000"
     volumes:
-      - ./anime:/app
+      - ./favorites:/app
     environment:
-      DATABASE_URL: mongodb://root:pass@mongo-anime/admin
-      MONGO_HOST: mongo
-      MONGO_DATABASE: anime
-      MONGO_USER: root
-      MONGO_PASSWORD: pass
-      # MONGO_HOST: mongo
-      # MONGO_DATABASE: accounts
-      # MONGO_USER: root
-      # MONGO_PASSWORD: pass - ABOVE CODE MIGHT NOT BE NEEDED!!!!!
-      SIGNING_KEY: KcToU9kvT68n3u40ocXqPk2KwQGhxDGZdz92AgjWPN0
-      # WAIT_HOSTS: mongo-api:27017
-      # WAIT_BEFORE: 5
-      # WAIT_TIMEOUT: 60
+      DATABASE_URL: postgresql://favorites:password@postgres/favorites
+      WAIT_HOSTS: 
+        postgres:5432
+        # SIGNING_KEY:${SIGNING_KEY}
+
+  watchlists:
+    build:
+      context: ./watchlists
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./watchlists:/app
+    environment:
+      DATABASE_URL: postgresql://watchlists:password@postgres/watchlists
+      WAIT_HOSTS: postgres:5432
 
   ghi:
-    build:
-      context: ghi
-      dockerfile: Dockerfile.dev
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /app
     volumes:
-      - example-node-modules:/app/node_modules
       - ./ghi:/app
-    # image: node:lts-bullseye
-    # command: /bin/bash run.sh
-    # working_dir: /app
-    # volumes:
-    #   - ./ghi:/app
     ports:
       - "3000:3000"
     environment:
-      # NODE_ENV: development
-      # HOST: "0.0.0.0"
-      # REACT_APP_SAMPLE_SERVICE: http://localhost:8000
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_ACCOUNTS: http://localhost:8080
-      REACT_APP_ANIME: http://localhost:8090
-      # WAIT_HOSTS: api:8000
-      # WAIT_BEFORE: 5
-      # WAIT_TIMEOUT: 60 - MIGHT BE NEEDED
+      REACT_APP_ACCOUNTS_API_HOST: http://localhost:8000
+      REACT_APP_FAVORITES_API_HOST: http://localhost:8090
+      REACT_APP_WATCHLISTS_API_HOST: http://localhost:8080
