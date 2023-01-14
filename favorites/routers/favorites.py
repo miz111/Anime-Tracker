@@ -1,7 +1,7 @@
+from auth import get_current_user
 from typing import List, Union
 from fastapi import APIRouter, Depends
 from queries.favorites import *
-from auth import get_current_user
 
 router = APIRouter()
 
@@ -10,6 +10,7 @@ def get_all(
     repo: FavoriteRepository = Depends(),
     account_data: dict = Depends(get_current_user),
 ):
+    # print(account_data, "OKJASL;KDFJL;KASDJFAL;KSDJF")
     return repo.get_all()
 
 @router.get("/favorites/{user_id}", response_model=Union[Error, List[FavoriteOut]])
@@ -30,8 +31,8 @@ def create_favorite(
 
 @router.delete("/favorites/{id}", response_model=bool)
 def delete_favorite(
-    id: str,
+    id: int,
     repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(get_current_user),
+    # account_data: dict = Depends(get_current_user),
 ) -> bool:
     return repo.delete(id)
