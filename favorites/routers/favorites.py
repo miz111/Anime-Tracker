@@ -1,38 +1,43 @@
-from auth import get_current_user
-from typing import List, Union
 from fastapi import APIRouter, Depends
 from queries.favorites import *
+from authenticator import authenticator
 
 router = APIRouter()
 
-@router.get("/favorites", response_model=Union[Error, List[FavoriteOut]])
+
+@router.get("/favorites", response_model=FavoriteList)
 def get_all(
     repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(get_current_user),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    # print(account_data, "OKJASL;KDFJL;KASDJFAL;KSDJF")
-    return repo.get_all()
+    if account_data:
+        return {"favorites": repo.get_all}
 
-@router.get("/favorites/{user_id}", response_model=Union[Error, List[FavoriteOut]])
+@router.get("/favorites/{user_id}", response_model=FavoriteList)
 def get_all_for_user(
     user_id: int,
     repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(get_current_user)
-) -> FavoriteOut:
-    return repo.get_all_for_user(user_id)
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    if account_data:
+        return {"favorites": repo.get_all(user_id)}
 
-@router.post("/favorites", response_model=FavoriteOut)
+@router.post("/favorites/{user_id}", response_model=FavoriteOut)
 def create_favorite(
     favorite: FavoriteIn,
+    # user_id: int,
     repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(get_current_user),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ):
-    return repo.create(favorite)
+    if account_data:
+        return repo.create(favorite)
 
-@router.delete("/favorites/{id}", response_model=bool)
+@router.delete("/favorites/{user_id}/{favorite_id}")
 def delete_favorite(
-    id: int,
+    user_id: int,
+    favorite_id: int,
     repo: FavoriteRepository = Depends(),
-    # account_data: dict = Depends(get_current_user),
-) -> bool:
-    return repo.delete(id)
+    account_data: dict = Depends(authenticator.get_current_account_data)
+):
+    if account_data:
+        return repo.delete(user_id, favorite_id)
