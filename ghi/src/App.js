@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import Nav from "./Nav";
-import SignUpForm from "./SignUpForm";
-import { AuthProvider, useToken } from "./auth";
+// import Nav from "./Nav";
+// import SignUpForm from "./SignUpForm";
+// import { AuthProvider, useToken } from "./auth";
 
 
 
