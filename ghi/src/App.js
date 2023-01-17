@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
+import HomePage from "./HomePage.js";
+import SignUpForm from "./SignUpForm.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-// import Nav from "./Nav";
+import Nav from "./Nav";
 // import SignUpForm from "./SignUpForm";
 // import LoginForm from "./LoginForm";
-// import { AuthProvider, useToken } from "./auth";
+import { AuthProvider, useToken } from "./auth";
 
 
 
