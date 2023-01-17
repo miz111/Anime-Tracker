@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import HomePage from "./HomePage.js";
 import "./App.css";
+import Top100 from "./Top100.js";
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -38,7 +39,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            
+            <Route path="/Top100/" element={<Top100 />} />
           </Routes>
         </div>
       </BrowserRouter>

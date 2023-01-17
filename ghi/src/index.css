@@ -13,3 +13,53 @@ code {
     monospace;
 }
 
+.media-card
+
+.media-card[data-v-70df6e62] {
+  animation: in-data-v-70df6e62 .3s linear;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: rgb(var(--color-background-100));
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 14px 30px rgba(var(--color-shadow-blue),.15),0 4px 4px rgba(var(--color-shadow-blue),.05);
+  display: inline-grid;
+  grid-template-columns: 48px auto;
+  position: relative;
+  text-align: left;
+  min-height: 80px;
+}
+
+.results.table {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 24px;
+}
+
+.results-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.results {
+  display: grid;
+  grid-gap: ;
+}
+
+
+.media-card {
+  animation: in-data-v-70df6e62 .3s linear;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: rgb(var(--color-background-100));
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 14px 30px rgba(var(--color-shadow-blue),.15),0 4px 4px rgba(var(--color-shadow-blue),.05);
+  display: inline-grid;
+  grid-template-columns: 48px auto;
+  position: relative;
+  text-align: left;
+  min-height: 80px;
+}
