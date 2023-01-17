@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { validateEmail, validatePassword } from './validation';
-import { getUserInfo, updateUserInfo } from './api';
+import { useSubmit } from 'react-router-dom';
 
 const EditAccount = () => {
   const [username, setUsername] = useState('');
@@ -11,7 +9,7 @@ const EditAccount = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const useSubmit = useSubmit();
 
   useEffect(() => {
     // Fetch current user information
