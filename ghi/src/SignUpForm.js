@@ -13,7 +13,6 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = { first_name, last_name, username, password, email };
-
     const signupUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/signup`;
     const fetchConfig = {
       method: "POST",
@@ -35,6 +34,10 @@ const SignUpForm = () => {
       setSubmitted(true);
     }
     navigate("/Login");
+  };
+    const handleSignOut = () => {
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -92,7 +95,7 @@ const SignUpForm = () => {
           type="password"
           className="form-control"
           id="password"
-          placeholder="shhhhhh"
+          placeholder="Password"
         />
       </div>
       <div className="mb-3">
@@ -112,7 +115,7 @@ const SignUpForm = () => {
       <button className="btn btn-primary">Create</button>
       {submitted && (
         <div className="success-message">
-          Success! Thank you for registering
+          Success! Thank you for Signing up!
         </div>
       )}
       <p>

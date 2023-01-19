@@ -1,50 +1,90 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AccountDetailView = () => {
-const [first_name, setFirstname] = useState("");
-const [last_name, setLastname] = useState("");
-const [username, setUsername] = useState("");
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch current user information
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const data = await getUserInfo();
-        setFirstname(data.firstname);
-        setLastname(data.lastname);
-        setUsername(data.username);
-        setEmail(data.email);
-        setPassword(data.password);
-      } catch (err) {
-        setError("Couldn't fetch user information, please try again later.");
-      } finally {
-        setLoading(false);
+    const fetchAccountData = async () => {
+      const accountUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/account`;
+      const fetchConfig = {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+      };
+
+      const response = await fetch(accountUrl, fetchConfig);
+
+      if (response.ok) {
+        const account = await response.json();
+        setEmail(account.email);
+        setUsername(account.username);
+        setFirstName(account.first_name);
+        setLastName(account.last_name);
+      } else {
+        navigate("/login");
       }
-    }
-    fetchData();
-  }, []);
+    };
+
+    fetchAccountData();
+  }, [navigate]);
 
   return (
-    <div className="account-detail-view">
-      {loading && <p>Loading...</p>}
-      {error && <p className="error-message">{error}</p>}
-      {!loading && !error && (
-        <>
-            <p>First Name: {first_name}</p>
-            <p>Last Name: {last_name}</p>
-          <p>Username: {username}</p>
-          <p>Email: {email}</p>
-          <p>Password: *******</p>
-        </>
-      )}
-      <button onClick={() => history.push("/edit-account")}>Edit Account</button>
-      <button onClick={() => history.push("/homepage")}>Back to Home Page</button>
-    </div>
+    <form>
+      <div className="mb-3">
+        <label htmlFor="firstname" className="form-label">
+          First name
+        </label>
+        <input
+          disabled
+          value={first_name}
+          type="text"
+          className="form-control"
+          id="firstname"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="lastName" className="form-label">
+          Last name
+        </label>
+        <input
+          disabled
+          value={last_name}
+          type="text"
+          className="form-control"
+          id="lastName"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="username" className="form-label">
+          User Name
+        </label>
+        <input
+          disabled
+          value={username}
+          type="text"
+          className="form-control"
+          id="username"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">
+          Email address
+        </label>
+        <input
+          disabled
+          value={email}
+          type="email"
+          className="form-control"
+          id="email"
+        />
+      </div>
+    </form>
   );
 };
 

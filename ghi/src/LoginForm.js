@@ -52,7 +52,6 @@ const LoginForm = () => {
                 />
                 <label htmlFor="password">Password</label>
               </div>
-
               <button type="submit" className="btn btn-funky-moon">
                 Log In
               </button>
