@@ -1,82 +1,126 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useToken } from "./auth";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function SignUpForm() {
-  const navigate = useNavigate();
-  const [, , , signup] = useToken();
+const SignUpForm = () => {
+  const [submitted, setSubmitted] = useState(false);
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [invalid, setInvalid] = useState(false);
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const navigate = useNavigate();
 
-  const clearState = () => {
-    setEmail("");
-    setPassword("");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = { first_name, last_name, username, password, email };
+
+    const signupUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/signup`;
+    const fetchConfig = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch(signupUrl, fetchConfig);
+
+    if (response.ok) {
+      //   const newUser = await response.json();
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setFirstName("");
+      setLastName("");
+      setSubmitted(true);
+    }
+    navigate("/Login");
   };
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const successful = await signup(email, password);
-    if (!successful) {
-      setInvalid(true);
-    } else {
-      clearState();
-      navigate("/");
-    }
-  }
-
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1 className="text-left display-6">Create account</h1>
-          <div className="text-left lead mb-3">
-            Already have an account?
-            <NavLink to="/login"> Login</NavLink>
-          </div>
-          <form id="create-appointment-form" onSubmit={handleSubmit}>
-            <div className="form-floating mb-3">
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-                required
-                type="text"
-                name="email"
-                id="email"
-                className="form-control"
-              />
-              <label htmlFor="email">Email</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="password"
-                required
-                type="password"
-                name="password"
-                id="password"
-                className="form-control"
-              />
-              <label htmlFor="password">Password</label>
-            </div>
-            <div className="col text-left">
-              <button className="btn btn-primary">Create</button>
-            </div>
-          </form>
-          {invalid && (
-            <div
-              className="alert alert-danger mb-0 p-4 mt-4"
-              id="invalid-message"
-            >
-            Sorry! This email is already in use! Please try another!
-            </div>
-          )}
-        </div>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-3">
+        <label htmlFor="firstname" className="form-label">
+          First name
+        </label>
+        <input
+          required
+          value={first_name}
+          onChange={(e) => setFirstName(e.target.value)}
+          type="text"
+          className="form-control"
+          id="firstname"
+          placeholder="First name"
+        />
       </div>
-    </div>
+      <div className="mb-3">
+        <label htmlFor="lastName" className="form-label">
+          Last name
+        </label>
+        <input
+          required
+          value={last_name}
+          onChange={(e) => setLastName(e.target.value)}
+          type="text"
+          className="form-control"
+          id="lastName"
+          placeholder="Last name"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="username" className="form-label">
+          User Name
+        </label>
+        <input
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          className="form-control"
+          id="username"
+          placeholder="Username"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="password" className="form-label">
+          Password
+        </label>
+        <input
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          className="form-control"
+          id="password"
+          placeholder="shhhhhh"
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="email" className="form-label">
+          Email address
+        </label>
+        <input
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          className="form-control"
+          id="email"
+          placeholder="you@email.com"
+        />
+      </div>
+      <button className="btn btn-primary">Create</button>
+      {submitted && (
+        <div className="success-message">
+          Success! Thank you for registering
+        </div>
+      )}
+      <p>
+        Already a member? Login{" "}
+        <a href={`${process.env.REACT_APP_ACCOUNTS_API_HOST}/Login`}>here</a>
+      </p>
+    </form>
   );
-}
+};
 
 export default SignUpForm;
-

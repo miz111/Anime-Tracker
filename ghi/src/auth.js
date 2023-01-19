@@ -7,7 +7,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_ACCOUNTS}/token`;
+  const url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -45,13 +45,28 @@ function handleErrorMessage(error) {
 export const AuthContext = createContext({
   token: null,
   setToken: () => null,
+  user: null,
+  setUser: () => null,
+  isLoggedIn: null,
+  setIsLoggedIn: () => null,
 });
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider
+      value={{
+        token,
+        setToken,
+        user,
+        setUser,
+        isLoggedIn,
+        setIsLoggedIn,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -60,7 +75,8 @@ export const AuthProvider = ({ children }) => {
 export const useAuthContext = () => useContext(AuthContext);
 
 export function useToken() {
-  const { token, setToken } = useAuthContext();
+  const { token, setToken, user, setUser, setIsLoggedIn } = useAuthContext();
+  // const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,18 +89,25 @@ export function useToken() {
     }
   }, [setToken, token]);
 
-  async function logout() {
-    if (token) {
-      const url = `${process.env.REACT_APP_ACCOUNTS}/token`;
-      await fetch(url, { method: "delete", credentials: "include" });
-      internalToken = null;
-      setToken(null);
-      navigate("/");
-    }
-  }
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_ACCOUNTS_API_HOST}/users/current`,
+  //       {
+  //         method: "get",
+  //         credentials: "include",
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     setUser(data);
+  //   }
+  //   if (token) {
+  //     fetchUsers();
+  //   }
+  // }, [setToken, token, setUser]);
 
   async function login(username, password) {
-    const url = `${process.env.REACT_APP_ACCOUNTS}/token`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`;
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
@@ -93,35 +116,26 @@ export function useToken() {
       credentials: "include",
       body: form,
     });
+    // const response2 = await fetch(
+    //   `${process.env.REACT_APP_ACCOUNTS_API_HOST}/users/current`,
+    //   {
+    //     method: "get",
+    //     credentials: "include",
+    //   }
+    // );
+    // setUser(await response2.json());
+
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      setIsLoggedIn(true);
+      navigate("/");
       return;
     }
     let error = await response.json();
+    setIsLoggedIn(false);
     return handleErrorMessage(error);
   }
-
-  async function signup(email, password) {
-    const url = `${process.env.REACT_APP_ACCOUNTS}/gathering/accounts`;
-    const response = await fetch(url, {
-      method: "post",
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      await login(email, password);
-      return true;
-    }
-    return false;
-  }
-
-  return [token, login, logout, signup];
+  return [token, login, user];
 }
-
 

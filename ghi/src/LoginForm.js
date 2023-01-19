@@ -1,83 +1,72 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useAuthContext, useToken } from "./auth";
 import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { useToken } from "./auth";
 
-function LoginForm() {
+const LoginForm = () => {
   const [, login] = useToken();
-  const [email, setEmail] = useState("");
+  const { isLoggedIn } = useAuthContext();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [invalid, setInvalid] = useState(false);
   let navigate = useNavigate();
 
-  const clearState = () => {
-    setEmail("");
-    setPassword("");
-    setInvalid("");
-  };
-
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const error = await login(email, password);
+    const error = await login(username, password);
     if (error) {
-      setInvalid(true);
+      isLoggedIn(false);
     } else {
-      clearState();
       navigate("/");
     }
-  }
+  };
 
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
-          <h1 className="text-left display-6">Login</h1>
-          <div className="text-left mb-3 lead">
-            Don't have an account?
-            <NavLink to="/signup"> Create account</NavLink>
+    <>
+      <div className="row login-style">
+        <div className="offset-3 col-6">
+          <div className="shadow p-4 mt-4 login-style">
+            <h1>Welcome back!</h1>
+            <form onSubmit={handleSubmit} id="login-form" method="POST">
+              <div className="form-floating mb-3">
+                <input
+                  onChange={(e) => setUsername(e.target.value)}
+                  value={username}
+                  id="username"
+                  name="username"
+                  type="text"
+                  autoComplete="username"
+                  required
+                  className="form-control"
+                />
+                <label htmlFor="username">Username</label>
+              </div>
+              <div className="form-floating mb-3">
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  className="form-control"
+                />
+                <label htmlFor="password">Password</label>
+              </div>
+
+              <button type="submit" className="btn btn-funky-moon">
+                Log In
+              </button>
+            </form>
+            {isLoggedIn === false && (
+              <div className="alert" id="invalid-credentials">
+                <p>Wrong credentials. Please try again.</p>
+              </div>
+            )}
           </div>
-          <form id="create-appointment-form" onSubmit={handleSubmit}>
-            <div className="form-floating mb-3">
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-                required
-                type="text"
-                name="email"
-                id="email"
-                className="form-control"
-              />
-              <label htmlFor="email">Email</label>
-            </div>
-            <div className="form-floating mb-3">
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="password"
-                required
-                type="password"
-                name="password"
-                id="password"
-                className="form-control"
-              />
-              <label htmlFor="password">Password</label>
-            </div>
-            <div className="col text-left">
-              <button className="btn btn-primary">Log In</button>
-            </div>
-          </form>
-          {invalid && (
-            <div
-              className="alert alert-danger mb-0 p-4 mt-4"
-              id="invalid-message"
-            >
-              Incorrect email and/or password. Please
-              try again.
-            </div>
-          )}
         </div>
       </div>
-    </div>
+    </>
   );
-}
+};
 
 export default LoginForm;

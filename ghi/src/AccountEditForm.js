@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useSubmit } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EditAccount = () => {
   const [username, setUsername] = useState('');

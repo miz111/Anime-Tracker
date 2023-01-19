@@ -1,13 +1,22 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import ErrorNotification from "./ErrorNotification";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
-import SignUpForm from "./SignUpForm.js";
-import EditAccount from "./AccountEdit.js";
-import LoginForm from "./LoginForm.js";
 import "./App.css";
+import SignUpForm from "./SignUpForm.js";
+import LoginForm from "./LoginForm.js";
+import AccountEditForm from "./AccountEditForm.js";
+import { AuthProvider, useToken } from "./auth";
 
+const domain = /https:\/\/[^/]+/;
+const basename = process.env.PUBLIC_URL.replace(domain, "");
+
+function GetToken() {
+  useToken();
+  return null;
+}
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -32,21 +41,23 @@ function App() {
   //   getData();
   // }, []);
 
-  return (
-    <div>
-      {/* <ErrorNotification error={error} />
-      <Construct info={launch_info} /> */}
-      <BrowserRouter>
+ return (
+    <BrowserRouter basename={basename}>
+      <AuthProvider>
+        <GetToken />
         <Nav />
         <div className="container">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/Top100/" element={<Top100 />} />
+            <Route path="/SignUpForm/" element={<SignUpForm />} />
+            <Route path="/LoginForm/" element={<LoginForm />} />
+            <Route path="/AccountEditForm/" element={<AccountEditForm />} />
           </Routes>
         </div>
-      </BrowserRouter>
-    </div>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
+
