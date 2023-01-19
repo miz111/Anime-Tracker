@@ -5,13 +5,6 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.get("/favorites", response_model=FavoriteList)
-def get_all(
-    repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    if account_data:
-        return {"favorites": repo.get_all}
 
 @router.get("/favorites/{user_id}", response_model=FavoriteList)
 def get_all_for_user(
@@ -25,7 +18,6 @@ def get_all_for_user(
 @router.post("/favorites/{user_id}", response_model=FavoriteOut)
 def create_favorite(
     favorite: FavoriteIn,
-    # user_id: int,
     repo: FavoriteRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data)
 ):

@@ -1,19 +1,18 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date
 from queries.pool import *
-# from typing import Union, List
 
 class FavoriteIn(BaseModel):
     user_id: int
     anime_title: str
-    date: datetime
+    date: date
     img_url: str
 
 class FavoriteOut(BaseModel):
     id: int
     user_id: int
     anime_title: str
-    date: datetime
+    date: date
     img_url: str
 
 class AccountOut(BaseModel):
