@@ -89,10 +89,10 @@ function Top100() {
               <div className="col-auto"></div>
               <div className="col-5">
                 <div className="card-body">
-                  <div className="card-title ">
+                  <div className="card-title">
                     {item.title_english}
                     <div className="card-subtitle mb-2 text-muted">
-                      {item.title}
+                      {item.title_japanese}
                     </div>
                   </div>
                   <div className="badge bg-danger">{item.genres[0].name}</div>
@@ -116,7 +116,7 @@ function Top100() {
                   <div className="item-episodes">{item.episodes} Episodes</div>
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-1">
                 <div className="item-status" align="center">
                   {item.status}
                   <div className="item-lastStatus" align="center">
@@ -124,7 +124,7 @@ function Top100() {
                   </div>
                 </div>
               </div>
-              <div className="col-auto">
+              <div className="col-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

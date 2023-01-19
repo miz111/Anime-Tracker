@@ -6,6 +6,7 @@ import Nav from "./Nav";
 import HomePage from "./HomePage.js";
 import "./App.css";
 import Top100 from "./Top100.js";
+import Details from "./Details.js";
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -40,6 +41,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/Top100/" element={<Top100 />} />
+            <Route path="/:mal_id/" element={<Details />} />
           </Routes>
         </div>
       </BrowserRouter>
