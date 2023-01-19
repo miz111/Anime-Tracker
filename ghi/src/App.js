@@ -5,9 +5,10 @@ import ErrorNotification from "./ErrorNotification";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import "./App.css";
-import SignUpForm from "./SignUpForm.js";
 import LoginForm from "./LoginForm.js";
+import SignUpForm from "./SignUpForm.js";
 import AccountEditForm from "./AccountEditForm.js";
+import AccountDetailView from "./AccountDetailView.js";
 import { AuthProvider, useToken } from "./auth";
 
 const domain = /https:\/\/[^/]+/;
@@ -48,9 +49,10 @@ function App() {
         <Nav />
         <div className="container">
           <Routes>
-            <Route path="/SignUpForm/" element={<SignUpForm />} />
             <Route path="/LoginForm/" element={<LoginForm />} />
+            <Route path="/SignUpForm/" element={<SignUpForm />} />
             <Route path="/AccountEditForm/" element={<AccountEditForm />} />
+            <Route path="/AccountDetailView/" element={<AccountDetailView />} />
           </Routes>
         </div>
       </AuthProvider>
