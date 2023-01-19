@@ -13,9 +13,18 @@ code {
     monospace;
 }
 
-.media-card
+.Rank {
+  font-size: xx-large;
+  font-weight: bold;
+  color: rgba(5,75,173,255);
+  text-align: center;
+}
 
-.media-card[data-v-70df6e62] {
+.card-title {
+  font-size: x-large;
+}
+
+.media-card {
   animation: in-data-v-70df6e62 .3s linear;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -62,4 +71,8 @@ code {
   position: relative;
   text-align: left;
   min-height: 80px;
+}
+
+.grid-item {
+  padding: 16px;
 }
