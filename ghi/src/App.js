@@ -24,7 +24,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="login/" element={<LoginForm />} />
-                <Route path="favorites" element={<Favorites />} />
+                <Route path="favorites/" element={<Favorites />} />
                 <Route path="favorites/new" element={<FavoriteForm />} />
               </Routes>
             </div>

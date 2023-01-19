@@ -1,58 +1,63 @@
 import { useState, useEffect } from "react";
-import { useAuthContext } from "./auth";
-
+import { getTokenInternal, useAuthContext } from "./auth";
+import { useNavigate } from "react-router-dom";
 
 export default function FavoriteForm() {
-  const [decodedUser, setDecodedUser] = useState();
   const { token, login, user } = useAuthContext();
-  // const [userID, setUserID] = useState("");
+  const [userID, setUserID] = useState("");
   const [animeTitle, setAnimeTitle] = useState("");
   const [date, setDate] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    function parseJwt(token) {
-      var base64Url = token.split(".")[1];
-      var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      var jsonPayload = decodeURIComponent(
-        window
-          .atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-
-      return JSON.parse(jsonPayload);
+    async function decodeToken() {
+      const token = await getTokenInternal();
+      console.log(token);
+      if (!token) {
+        navigate("/login");
+      } else {
+        console.log("pass token check? maybe?");
+        const url = `${process.env.REACT_APP_FAVORITES_API_HOST}/favorites/${token.account.id}`;
+        try {
+          const response = await fetch(url, {
+            headers: {
+              Authorization: `Bearer ${token.access_token}`,
+            },
+          });
+          if (response.ok) {
+            console.log("good response");
+            const data = await response.json();
+            setUserID(data);
+          } else {
+            navigate("/");
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
     }
-    async function handleToken() {
-        return parseJwt(token);
-    }
-    // we need the token to await for the promise
-    if (token) {
-        const decodedToken = handleToken();
-        console.log(decodedToken, "KLASJDF;LKSAJFL;KSAJFL;SAKJFSL;A")
-        setDecodedUser(decodedToken.account);
-    }
+    decodeToken();
   });
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("ASDASDF", decodedUser)
     const newFavorite = {
-      user_id: decodedUser.id,
+      // user_id: decodedUser,
+      userID,
       animeTitle,
       date,
       imgUrl,
     };
 
-    const favoriteUrl = `${process.env.REACT_APP_FAVORITES_API_HOST}/favorites/${decodedUser.id}`;
+    const favoriteUrl = `${process.env.REACT_APP_FAVORITES_API_HOST}/favorites/${user.id}`;
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(newFavorite),
       headers: {
-        Authorization: "Bearer " + token,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };
@@ -76,9 +81,18 @@ export default function FavoriteForm() {
           <h1>Add your favorite Anime</h1>
           <form onSubmit={handleSubmit} id="create-bin-form">
             {/* <div className="form-floating mb-3">
-                            <label htmlFor='userID'>User ID</label>
-                            <input value={userID} onChange={(e)=>setUserID(e.target.value)} placeholder="user_id" required type="text" name="user_id" id="user_id" className="form-control form-input" />
-                        </div> */}
+              <label htmlFor="userID">User ID</label>
+              <input
+                value={decodedUser.id}
+                onChange={(e) => setUserID(e.target.value)}
+                placeholder="user_id"
+                required
+                type="text"
+                name="user_id"
+                id="user_id"
+                className="form-control form-input"
+              />
+            </div> */}
             <div className="form-floating mb-3">
               <label htmlFor="date">Anime Title</label>
               <input

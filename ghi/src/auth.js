@@ -13,12 +13,11 @@ export async function getTokenInternal() {
       credentials: "include",
     });
     if (response.ok) {
-        console.log("HIIII")
       const data = await response.json();
       internalToken = data.access_token;
       return internalToken;
     }
-  } catch (e) {console.log("hello")}
+  } catch (e) {}
   return false;
 }
 
@@ -82,14 +81,37 @@ export function useToken() {
 
   useEffect(() => {
     async function fetchToken() {
-      const token = await getTokenInternal();
+      let token1 = await getTokenInternal();
+      let token = token1[0];
+      let user1 = await getTokenInternal();
+      let user = user1[1];
       setToken(token);
+      setUser(user);
+      // async function fetchToken() {
+      //   const token = await getTokenInternal();
+      //   setToken(token);
     }
-    if (!token) {
+    if (!(token && user)) {
       fetchToken();
     }
-  }, [setToken, token]);
+  }, [setToken, token, setUser, user]);
 
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_ACCOUNTS_API_HOST}/users/current`,
+  //       {
+  //         method: "get",
+  //         credentials: "include",
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     setUser(data);
+  //   }
+  //   if (token) {
+  //     fetchUsers();
+  //   }
+  // }, [setToken, token, setUser]);
 
   async function login(username, password) {
     const url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`;
@@ -101,10 +123,19 @@ export function useToken() {
       credentials: "include",
       body: form,
     });
+    // const response2 = await fetch(
+    //   `${process.env.REACT_APP_ACCOUNTS_API_HOST}/users/current`,
+    //   {
+    //     method: "get",
+    //     credentials: "include",
+    //   }
+    // );
+    // setUser(await response2.json());
 
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      setUser(user);
       setIsLoggedIn(true);
       navigate("/");
       return;
