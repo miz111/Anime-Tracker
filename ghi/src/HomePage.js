@@ -17,7 +17,7 @@ function HomePage() {
       .catch((error) => console.log("Error", error));
   }, []);
 
-  console.log(popularEpisodes[0]);
+  console.log(popularEpisodes);
 
   let test = JSON.stringify(popularEpisodes[0]);
 

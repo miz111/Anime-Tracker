@@ -17,7 +17,6 @@ code {
   font-size: xx-large;
   font-weight: bold;
   color: rgba(5,75,173,255);
-  text-align: center;
 }
 
 .card-title {
@@ -25,20 +24,6 @@ code {
   font-weight: bold;
 }
 
-.media-card {
-  animation: in-data-v-70df6e62 .3s linear;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  background: rgb(var(--color-background-100));
-  border-radius: 4px;
-  padding: 10px;
-  box-shadow: 0 14px 30px rgba(var(--color-shadow-blue),.15),0 4px 4px rgba(var(--color-shadow-blue),.05);
-  display: inline-grid;
-  grid-template-columns: 48px auto;
-  position: relative;
-  text-align: left;
-  min-height: 80px;
-}
 
 .results.table {
   display: grid;
@@ -55,25 +40,20 @@ code {
 
 .results {
   display: grid;
-  grid-gap: ;
 }
 
-
-.media-card {
-  animation: in-data-v-70df6e62 .3s linear;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  background: rgb(var(--color-background-100));
-  border-radius: 4px;
-  padding: 10px;
-  box-shadow: 0 14px 30px rgba(var(--color-shadow-blue),.15),0 4px 4px rgba(var(--color-shadow-blue),.05);
-  display: inline-grid;
-  grid-template-columns: 48px auto;
-  position: relative;
-  text-align: left;
-  min-height: 80px;
-}
 
 .grid-item {
   padding: 16px;
+}
+
+.left-detail {
+  width: 45%;
+  display: block;
+  float: right;
+}
+
+.badge-crunchyroll {
+  background-color: rgb(244, 117, 33);
+  color: white
 }

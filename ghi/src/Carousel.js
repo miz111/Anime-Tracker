@@ -72,19 +72,26 @@ const MyCarousel = (props) => {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <div className="container px-4 py-6">
-          <div className="flex flex-wrap justify-center">
-            <div className="row featurette">
-              <div className="col-lg-6 col-md-6 col-sm-1 order-2">
-                <h2 className="featurette-heading fw-bold 1h-1">
-                  {item.englishTitle}</h2>
+        <div className="card">
+          <div className="container px-4 py-6">
+            <div className="flex flex-wrap justify-center">
+              <div className="row featurette">
+                <div className="col-lg-6 col-md-6 col-sm-1 order-2">
+                  <h2 className="featurette-heading fw-bold 1h-1">
+                    {item.englishTitle}
+                  </h2>
                   <h2 className="text-muted">{item.japaneseTitle}</h2>
-                <p className ="lead" align="left">
-                  {item.synopsis}
-                </p>
-              </div>
-              <div className="col-lg-6 col-md-6 col-sm-1 order-1">
-                <img src={item.src} alt={item.altText} height="680px" width="450px" />
+                  <p className="lead" align="left">
+                    {item.synopsis}
+                  </p>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-1 order-1">
+                  <img
+                    src={item.src}
+                    alt={item.altText}
+                    height="500px"
+                  />
+                </div>
               </div>
             </div>
           </div>

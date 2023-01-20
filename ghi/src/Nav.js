@@ -1,8 +1,19 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./index.css";
+// import { useToken } from "./auth";
+
 
 function Nav() {
+  // const [token] = useToken(); 
+
+  //  <li>
+  //    <NavLink className={token ? "d-none" : "nav-link"} to="login/">
+  //      Login
+  //    </NavLink>
+  //  </li>; 
+
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -62,6 +73,7 @@ function Nav() {
                       Offered Models
                     </NavLink>
                   </li>
+                  
                   <li className="nav-item">
                     <NavLink
                       className="nav-link dropdown-item"
