@@ -26,18 +26,6 @@ class FavoriteList(BaseModel):
     favorites: list[FavoriteOut]
 
 class FavoriteRepository:
-    def delete(self, user_id: int, favorite_id: int):
-        connection = get_conn()
-        with connection.cursor() as db:
-            db.execute(
-                """
-                DELETE FROM favorites
-                WHERE id = %s
-                """,
-                [favorite_id],
-            )
-            return True
-
     def get_all(self, user_id: int = None) -> list[FavoriteOut]:
         connection = get_conn()
         with connection.cursor() as db:
@@ -84,3 +72,15 @@ class FavoriteRepository:
                 return FavoriteOut(id=id, **old_data)
         except Exception:
             return {"message": "Could not create"}
+
+    def delete(self, user_id: int, favorite_id: int):
+        connection = get_conn()
+        with connection.cursor() as db:
+            db.execute(
+                """
+                DELETE FROM favorites
+                WHERE id = %s
+                """,
+                [favorite_id],
+            )
+            return True

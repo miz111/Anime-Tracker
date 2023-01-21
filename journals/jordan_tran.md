@@ -1,3 +1,27 @@
+## 01/19/23
+
+During the stand-up meeting today, Alvi delivered huge results and our landing page looks like this site https://myanimelist.net/topanime.php . Pretty impressive and I am glad that Alvi came in clutch. Also I am still stuck on the same bug as yesterday all day today... But now since I've fixed the error thanks to Jess and Allen, now I am getting a 422 error on the front-end. It's the type of error I'd rather see.. Good progress!
+
+
+## 01/18/23
+
+Today I worked on my front-end and I got the form to rendered however auth was not working.... Jess, Cheng, Matt and I tried to tackle this but no luck... Hopefully it'll get fixed soon. Also we as a group found out that Tommy does not know how to import stuff on React.
+
+
+## 01/17/23
+
+After the weekend, Jess, Cheng, Alvi, and I delivered great results. Us four put in great amount of work and we are making huge progress. Tommy on the other hand, doesn't know what he is doing so he did not deliver results. But we were extending our hands to Tommy to see if he needed help. Hopefully this will put a band-aid to our problems as a group. Also I have finished my back-end.
+
+
+## 01/13/23
+
+Today we found out that Tommy doesn't feel comfortable writing out the back-end because fastAPI was a brand new technology that he couldn't grasp. So Jess decided to write out her entire accounts service backend and assigned Tommy to account service front-end. I on the other hand was making good progress in my service back-end. Also we as a group decided to have small goals to work on during the weekend.
+
+
+## 01/12/23
+
+Today we started writing out our entire back end again because switched to postgreSQL. So far good progress and Jess, Cheng and I were brainstorming about our endpoints should look like. So far so good.
+
 
 ## 01/11/23
 
@@ -32,7 +56,6 @@ Wrote backend for my favorite service. I feel like I am on the right track but t
 ## 01/05/23
 
 Jess, Cheng, and I were figuring out how to set up the project. Our problem was trying to get all containers working. But, nothing always goes as planned because our ghi and mongo express containers aren't running.. However we fixed our ghi containers relatively quickly but when trying to get mongo express container running, we spent all day trying to fix it. After we've exhausted our options, we decided to ask for help. The seirs, Matt and John came through for us and even though Matt and John never touched mongoDB before, they went out of their way to research the problem and instructed us to do trial and error stuff into our yaml file. After a few hours, of tweaking our yaml file, the container finally decided to run.... Thank you Matt and John.. Also huge thanks to Matt for explaining how asynchronous JS works. Literally dumbed it down for me.
-
 
 
 ## 01/04/23

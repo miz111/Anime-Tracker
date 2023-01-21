@@ -15,7 +15,7 @@ def get_all_for_user(
     if account_data:
         return {"favorites": repo.get_all(user_id)}
 
-@router.post("/favorites/{user_id}", response_model=FavoriteOut)
+@router.post("/favorites", response_model=FavoriteOut)
 def create_favorite(
     favorite: FavoriteIn,
     repo: FavoriteRepository = Depends(),

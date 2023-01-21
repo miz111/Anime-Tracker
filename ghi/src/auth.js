@@ -81,20 +81,13 @@ export function useToken() {
 
   useEffect(() => {
     async function fetchToken() {
-      let token1 = await getTokenInternal();
-      let token = token1[0];
-      let user1 = await getTokenInternal();
-      let user = user1[1];
+      const token = await getTokenInternal();
       setToken(token);
-      setUser(user);
-      // async function fetchToken() {
-      //   const token = await getTokenInternal();
-      //   setToken(token);
     }
-    if (!(token && user)) {
+    if (!token) {
       fetchToken();
     }
-  }, [setToken, token, setUser, user]);
+  }, [setToken, token]);
 
   // useEffect(() => {
   //   async function fetchUsers() {
@@ -135,7 +128,6 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      setUser(user);
       setIsLoggedIn(true);
       navigate("/");
       return;
