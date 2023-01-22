@@ -35,3 +35,12 @@ code {
   border-radius: 35px;
 }
 
+.buttons-wrapper a {
+  background: rgba(35, 35, 108, 0.629);
+  padding: 8px;
+  color: white;
+  border-radius: 8px;
+  display: inline-block;
+  text-decoration: none;
+  margin-right: 10px;
+}

@@ -122,7 +122,6 @@ const SignUpForm = () => {
         </label>
         <input
           required
-          value={isAuthenticated}
           onChange={(e) => setIsAuthenticated(e.target.value)}
           type="password"
           className="form-control"
@@ -138,7 +137,7 @@ const SignUpForm = () => {
       )}
       <p>
         Already a member? Login{" "}
-        <a href={`${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`}>here</a>
+        <a href={"/Login"}>here</a>
       </p>
     </form>
   );

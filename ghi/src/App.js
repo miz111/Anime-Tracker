@@ -11,6 +11,7 @@ import AccountEditForm from "./AccountEditForm.js";
 import AccountDetailView from "./AccountDetailView.js";
 import { AuthProvider, useToken } from "./auth";
 import HomePage from "./HomePage.js";
+import EditPassword from "./EditPassword.jsx";
 
 
 const domain = /https:\/\/[^/]+/;
@@ -54,8 +55,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="signup" element={<SignUpForm />} />
             <Route path="/Login" element={<LoginForm />} />   
-            <Route path="/AccountEditForm/" element={<AccountEditForm />} />
-            <Route path="/AccountDetailView/" element={<AccountDetailView />} />
+            <Route path="/AccountEditForm" element={<AccountEditForm />} />
+            <Route path="/AccountDetailView" element={<AccountDetailView />} />
+            <Route path="/editpassword" element={<EditPassword />} />
           </Routes>
         </div>
       </AuthProvider>

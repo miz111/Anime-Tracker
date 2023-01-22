@@ -1,91 +1,93 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthContext } from "./auth";
 
 const AccountDetailView = () => {
-  const [first_name, setFirstName] = useState("");
-  const [last_name, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const { userdata } = useAuthContext();
+
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchAccountData = async () => {
-      const accountUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/account`;
-      const fetchConfig = {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
-        },
-      };
+    console.log(userdata)
 
-      const response = await fetch(accountUrl, fetchConfig);
-
-      if (response.ok) {
-        const account = await response.json();
-        setFirstName(account.first_name);
-        setLastName(account.last_name);
-        setEmail(account.email);
-        setUsername(account.username);
-      } else {
-        navigate("/login");
-      }
-    };
-
-    fetchAccountData();
   }, [navigate]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
-    <form>
-      <div className="mb-3">
-        <label htmlFor="firstname" className="form-label">
-          First name
-        </label>
-        <input
-          disabled
-          value={first_name}
-          type="text"
-          className="form-control"
-          id="firstname"
-        />
+    <div className="accountwrapper">
+      {userdata && 
+      <>       <h2>First Name: {userdata.first_name}</h2>
+      <h2>Last Name: {userdata.last_name}</h2>
+      <h2>Email: {userdata.email}</h2>
+      <h2>Username: {userdata.username}</h2>
+      <div className="buttons-wrapper">
+        <Link to={"/AccountEditForm"}>Edit Profile</Link>
+        <Link to={"/editpassword"}>Edit Password</Link>
       </div>
-      <div className="mb-3">
-        <label htmlFor="lastName" className="form-label">
-          Last name
-        </label>
-        <input
-          disabled
-          value={last_name}
-          type="text"
-          className="form-control"
-          id="lastName"
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="username" className="form-label">
-          User Name
-        </label>
-        <input
-          disabled
-          value={username}
-          type="text"
-          className="form-control"
-          id="username"
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Email address
-        </label>
-        <input
-          disabled
-          value={email}
-          type="email"
-          className="form-control"
-          id="email"
-        />
-      </div>
-    </form>
+      </>
+
+      }
+     
+    </div>
+    // <form onSubmit={handleSubmit}>
+    //   <div className="mb-3">
+    //     <label htmlFor="firstname" className="form-label">
+    //       First name
+    //     </label>
+    //     <input
+    //       // disabled
+    //       value={userdata.first_name}
+    //       type="text"
+    //       className="form-control"
+    //       id="firstname"
+    //       onChange={(e) => setFirstName(e.target.value)}
+    //     />
+    //   </div>
+    //   <div className="mb-3">
+    //     <label htmlFor="lastName" className="form-label">
+    //       Last name
+    //     </label>
+    //     <input
+    //       // disabled
+    //       value={userdata.last_name}
+    //       type="text"
+    //       className="form-control"
+    //       id="lastName"
+    //       onChange={(e) => setLastName(e.target.value)}
+    //     />
+    //   </div>
+    //   <div className="mb-3">
+    //     <label htmlFor="username" className="form-label">
+    //       User Name
+    //     </label>
+    //     <input
+    //       // disabled
+    //       value={userdata.username}
+    //       type="text"
+    //       className="form-control"
+    //       id="username"
+    //       onChange={(e) => setUsername(e.target.value)}
+    //     />
+    //   </div>
+    //   <div className="mb-3">
+    //     <label htmlFor="email" className="form-label">
+    //       Email address
+    //     </label>
+    //     <input
+    //       // disabled
+    //       value={userdata.email}
+    //       type="email"
+    //       className="form-control"
+    //       id="email"
+    //       onChange={(e) => setEmail(e.target.value)}
+    //     />
+    //   </div>
+    //   <button type="submit">Submit</button>
+    // </form>
   );
 };
 

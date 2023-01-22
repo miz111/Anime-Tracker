@@ -5,9 +5,10 @@ import { useToken, useAuthContext } from "./auth";
 
 function LogoutButton() {
   const [, , logout] = useToken();
+    const { token, setToken } = useAuthContext();
   return (
     <div className="buttons">
-      <button onClick={logout} className="btn btn-outline-primary">
+      <button onClick={() => {setToken(null); localStorage.clear(); console.log(token)}} className="btn btn-outline-primary">
         Log out
       </button>
     </div>
@@ -53,6 +54,9 @@ function Nav() {
                 </NavLink>
               )}
             </div>
+                <NavLink className="btn btn-primary" to="/AccountDetailView/">
+                  Account
+                </NavLink>
           </div>
         </div>
       </div>
