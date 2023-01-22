@@ -26,7 +26,6 @@ class FakeAuthenticator:
             "username": "string"
             }
 
-
 def test_create_favorite():
     favorite_in = FavoriteIn(
         user_id="1",
@@ -46,12 +45,11 @@ def test_create_favorite():
 
     expected_favorite.date = expected_favorite.date.isoformat()
 
+# two dependencies here because of auth
+# one for Favrepo
+# second for get_current_account_data
     app.dependency_overrides[FavoriteRepository] = FakeFavoriteRespository
     app.dependency_overrides[authenticator.get_current_account_data] = FakeAuthenticator
-
     response = client.post("/favorites", json=favorite_in.dict())
-
     assert response.status_code == 200
     assert response.json() == expected_favorite.dict()
-
-    

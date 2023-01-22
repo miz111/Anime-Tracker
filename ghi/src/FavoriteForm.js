@@ -5,17 +5,16 @@ export default function FavoriteForm() {
   const [decodedUser, setDecodedUser] = useState("");
   const { token } = useAuthContext();
   const [userID, setUserID] = useState("");
-  //   console.log(token, "NOOOOOOOOOO");
   const [animeTitle, setAnimeTitle] = useState("");
   const [date, setDate] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [jwt, setJwt] = useState(null);
 
   function parseJwt(token) {
-    console.log(token, "token inside decoding");
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
+    console.log(token);
+    let base64Url = token.split(".")[1];
+    let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    let jsonPayload = decodeURIComponent(
       window
         .atob(base64)
         .split("")
@@ -25,7 +24,7 @@ export default function FavoriteForm() {
         .join("")
     );
     const variable = JSON.parse(jsonPayload);
-    console.log(variable, "-asdfasdf");
+    console.log(variable);
     setDecodedUser(variable.account.id);
   }
 
@@ -33,7 +32,7 @@ export default function FavoriteForm() {
     fetch(token).then((response) => {
       if (typeof response.token !== "object") {
         setJwt(token);
-        console.log(token, "token in the fetch request");
+        console.log(token);
         if (jwt !== null) {
           parseJwt(jwt);
         }
@@ -41,7 +40,7 @@ export default function FavoriteForm() {
     });
 
   }, [token, jwt]);
-  console.log(decodedUser, "fdsafas");
+  console.log(decodedUser);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -53,7 +52,7 @@ export default function FavoriteForm() {
       img_url: imgUrl,
     };
     console.log(typeof newFavorite)
-    console.log("newFavorite", newFavorite)
+    console.log(newFavorite)
     const favoriteUrl = `${process.env.REACT_APP_FAVORITES_API_HOST}/favorites`;
     const fetchConfig = {
       method: "post",
@@ -69,7 +68,6 @@ export default function FavoriteForm() {
     if (response.ok) {
       const data = await response.json();
       console.log(data);
-      delete data.img_url;
       setUserID("");
       setAnimeTitle("");
       setDate("");

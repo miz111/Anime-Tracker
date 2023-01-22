@@ -1,3 +1,8 @@
+## 01/20/23
+
+Today I worked on fixing my 422 bug on the front-end. Turned out it was a very simple fix.... LITERALLY -_-. Also, I've wrote my unit test for my create request from my service and they all passed. Happy Friday.
+
+
 ## 01/19/23
 
 During the stand-up meeting today, Alvi delivered huge results and our landing page looks like this site https://myanimelist.net/topanime.php . Pretty impressive and I am glad that Alvi came in clutch. Also I am still stuck on the same bug as yesterday all day today... But now since I've fixed the error thanks to Jess and Allen, now I am getting a 422 error on the front-end. It's the type of error I'd rather see.. Good progress!
@@ -10,7 +15,7 @@ Today I worked on my front-end and I got the form to rendered however auth was n
 
 ## 01/17/23
 
-After the weekend, Jess, Cheng, Alvi, and I delivered great results. Us four put in great amount of work and we are making huge progress. Tommy on the other hand, doesn't know what he is doing so he did not deliver results. But we were extending our hands to Tommy to see if he needed help. Hopefully this will put a band-aid to our problems as a group. Also I have finished my back-end.
+After the weekend, Jess, Cheng, Alvi, and I delivered great results. Us four put in great amount of work and we are making huge progress. Tommy on the other hand, doesn't know what he is doing so he did not deliver results. But we were extending our hands out to Tommy to see if he needed help. Hopefully this will put a band-aid to our problems as a group. Also I have finished my back-end and all end points return 200 ok WITH AUTH WORKING.. Yay 
 
 
 ## 01/13/23
@@ -20,7 +25,7 @@ Today we found out that Tommy doesn't feel comfortable writing out the back-end 
 
 ## 01/12/23
 
-Today we started writing out our entire back end again because switched to postgreSQL. So far good progress and Jess, Cheng and I were brainstorming about our endpoints should look like. So far so good.
+Today we started writing out our entire back end again because we switched to postgreSQL. So far good progress and Jess, Cheng and I were brainstorming about our endpoints should look like. So far so good.
 
 
 ## 01/11/23

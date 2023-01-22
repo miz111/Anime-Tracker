@@ -33,3 +33,8 @@ def delete_favorite(
 ):
     if account_data:
         return repo.delete(user_id, favorite_id)
+
+#dummy get request for unit test testing
+# @router.get("/favorites")
+# def get_whatever(account_data: dict = Depends(authenticator.get_account_data)):
+#     return account_data
