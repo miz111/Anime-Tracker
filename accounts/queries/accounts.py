@@ -39,18 +39,45 @@ class AccountQueries:
                             , username
                             , password
                         FROM users
-                        WHERE username = (%s)
+                        WHERE username = %s
                         """,
                         [username]
                     )
                     record = result.fetchone()
-                    print("record", record)
+                    print("record!!!!!!!", record)
                     if record is None:
                         return None
                     return self.record_to_account_out(record)
         except Exception as e:
             print(e)
             return {"message": "Could not get that account"}
+
+    def get_by_id(self, user_id: int) -> Optional[AccountOutWithPassword]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id
+                            , first_name
+                            , last_name
+                            , email
+                            , username
+                            , password
+                        FROM users
+                        WHERE id = %s
+                        """,
+                        [user_id]
+                    )
+                    record = result.fetchone()
+
+                    if record is None:
+                        return None
+                    return self.record_to_account_out(record)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that account"}
+
 
     def get_all(self) -> Union[Error, List[AccountOut]]:
         try:
@@ -81,6 +108,54 @@ class AccountQueries:
         except Exception as e:
             print(e)
             return {"message": "Could not get all accounts"}
+
+    def update(self, user_id: int, account: AccountIn) -> Union[AccountOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE users
+                        SET first_name = %s
+                         , last_name = %s
+                         , email = %s
+                         , username = %s
+                         , password = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            account.first_name,
+                            account.last_name,
+                            account.email,
+                            account.username,
+                            account.password,
+                            user_id
+                        ],
+                    )
+
+                    # return self.account_in_to_out(user_id, account)
+                    old_data = account.dict()
+                    print(old_data)
+                    return AccountOut(id=user_id, **old_data)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update account."}
+
+    def delete(self, user_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM users
+                        WHERE id = %s
+                        """,
+                        [user_id],
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return {"message": "Could not delete account."}
 
     def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         try:

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AccountDetailView = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,10 +23,10 @@ const AccountDetailView = () => {
 
       if (response.ok) {
         const account = await response.json();
-        setEmail(account.email);
-        setUsername(account.username);
         setFirstName(account.first_name);
         setLastName(account.last_name);
+        setEmail(account.email);
+        setUsername(account.username);
       } else {
         navigate("/login");
       }
