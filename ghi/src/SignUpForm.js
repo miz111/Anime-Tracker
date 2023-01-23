@@ -14,18 +14,20 @@ const SignUpForm = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { token } = useAuthContext();
   const navigate = useNavigate();
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = { first_name, last_name, username, password, email, submitted };
-    const signupUrl = `http://localhost:8000/api/accounts`;
+    const signupUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/accounts`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Authorization": `Bearer ${token}`,
+        "credentials": "include",
         "Content-Type": "application/json",
+        "mode": "cors"
       },
     };
 
@@ -43,7 +45,7 @@ const SignUpForm = () => {
     navigate("/Login");
   };
 
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
@@ -73,48 +75,48 @@ const SignUpForm = () => {
           id="lastName"
           placeholder="Last name"
         />
-      <div className="mb-3">
-        <label htmlFor="email" className="form-label">
-          Email address
-        </label>
-        <input
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          className="form-control"
-          id="email"
-          placeholder="Email address"
-        />
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email address
+          </label>
+          <input
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            className="form-control"
+            id="email"
+            placeholder="Email address"
+          />
         </div>
-      <div className="mb-3">
-        <label htmlFor="username" className="form-label">
-          Username
-        </label>
-        <input
-          required
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          type="text"
-          className="form-control"
-          id="username"
-          placeholder="Username"
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="password" className="form-label">
-          Password
-        </label>
-        <input
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          className="form-control"
-          id="password"
-          placeholder="Password"
-        />
-      </div>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
+          <input
+            required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            type="text"
+            className="form-control"
+            id="username"
+            placeholder="Username"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
       </div>
       <div className="mb-3">
         <label htmlFor="password" className="form-label">

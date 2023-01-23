@@ -129,6 +129,22 @@ export function useToken() {
       const token = await getTokenInternal();
       setToken(token);
       setIsLoggedIn(true);
+      fetch(`${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`, {
+        method: "GET",
+        credentials: "include",
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setUser({
+            id: data.account.id,
+            username: data.account.username,
+            first_name: data.account.first_name,
+            last_name: data.account.last_name,
+            email: data.account.email
+          })
+        })
+
       navigate("/");
       return;
     }

@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "./auth";
 
 const AccountDetailView = () => {
-  const { userdata, user, setUser } = useAuthContext();
+  const { user, setUser } = useAuthContext();
 
   const navigate = useNavigate();
   // useEffect(async() => {
-    // setUser(userdata)
+  // setUser(userdata)
   //   if (user == null) {
   //     const Url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/accounts/${userdata.id}`;
   //     const fetchConfig = {
@@ -35,7 +35,8 @@ const AccountDetailView = () => {
   return (
     <div className="accountwrapper">
       {user &&
-        <>       <h2>First Name: {user.first_name}</h2>
+        <>
+          <h2>First Name: {user.first_name}</h2>
           <h2>Last Name: {user.last_name}</h2>
           <h2>Email: {user.email}</h2>
           <h2>Username: {user.username}</h2>
