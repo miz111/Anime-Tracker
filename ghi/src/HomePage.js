@@ -15,11 +15,10 @@ function HomePage() {
       .catch((error) => console.log("Error", error));
   }, []);
 
-  console.log(popularEpisodes);
 
   let test = JSON.stringify(popularEpisodes[0]);
 
-  
+
 
   return (
     <div className="px-4 py-5 my-5 text-center">

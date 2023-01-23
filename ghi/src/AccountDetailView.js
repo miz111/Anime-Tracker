@@ -3,91 +3,50 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "./auth";
 
 const AccountDetailView = () => {
-  const { userdata } = useAuthContext();
-
+  const { userdata, user, setUser } = useAuthContext();
 
   const navigate = useNavigate();
+  // useEffect(async() => {
+    // setUser(userdata)
+  //   if (user == null) {
+  //     const Url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/accounts/${userdata.id}`;
+  //     const fetchConfig = {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": `Bearer ${localStorage.getItem("token")}`
+  //       },
+  //     };
 
-  useEffect(() => {
-    console.log(userdata)
-
-  }, [navigate]);
+  //     const response = await fetch(Url, fetchConfig)
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         console.log(data)
+  //         setUser(data)
+  //       })
+  //       ;
+  //   }
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   }
-
+  console.log(user)
   return (
     <div className="accountwrapper">
-      {userdata && 
-      <>       <h2>First Name: {userdata.first_name}</h2>
-      <h2>Last Name: {userdata.last_name}</h2>
-      <h2>Email: {userdata.email}</h2>
-      <h2>Username: {userdata.username}</h2>
-      <div className="buttons-wrapper">
-        <Link to={"/AccountEditForm"}>Edit Profile</Link>
-        <Link to={"/editpassword"}>Edit Password</Link>
-      </div>
-      </>
+      {user &&
+        <>       <h2>First Name: {user.first_name}</h2>
+          <h2>Last Name: {user.last_name}</h2>
+          <h2>Email: {user.email}</h2>
+          <h2>Username: {user.username}</h2>
+          <div className="buttons-wrapper">
+            <Link to={"/AccountEditForm"}>Edit Profile</Link>
+          </div>
+        </>
 
       }
-     
+
     </div>
-    // <form onSubmit={handleSubmit}>
-    //   <div className="mb-3">
-    //     <label htmlFor="firstname" className="form-label">
-    //       First name
-    //     </label>
-    //     <input
-    //       // disabled
-    //       value={userdata.first_name}
-    //       type="text"
-    //       className="form-control"
-    //       id="firstname"
-    //       onChange={(e) => setFirstName(e.target.value)}
-    //     />
-    //   </div>
-    //   <div className="mb-3">
-    //     <label htmlFor="lastName" className="form-label">
-    //       Last name
-    //     </label>
-    //     <input
-    //       // disabled
-    //       value={userdata.last_name}
-    //       type="text"
-    //       className="form-control"
-    //       id="lastName"
-    //       onChange={(e) => setLastName(e.target.value)}
-    //     />
-    //   </div>
-    //   <div className="mb-3">
-    //     <label htmlFor="username" className="form-label">
-    //       User Name
-    //     </label>
-    //     <input
-    //       // disabled
-    //       value={userdata.username}
-    //       type="text"
-    //       className="form-control"
-    //       id="username"
-    //       onChange={(e) => setUsername(e.target.value)}
-    //     />
-    //   </div>
-    //   <div className="mb-3">
-    //     <label htmlFor="email" className="form-label">
-    //       Email address
-    //     </label>
-    //     <input
-    //       // disabled
-    //       value={userdata.email}
-    //       type="email"
-    //       className="form-control"
-    //       id="email"
-    //       onChange={(e) => setEmail(e.target.value)}
-    //     />
-    //   </div>
-    //   <button type="submit">Submit</button>
-    // </form>
   );
 };
 

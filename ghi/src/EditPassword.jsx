@@ -9,25 +9,6 @@ const EditPassword = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = { first_name, last_name, username, password, email };
-    // const editUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/accounts`;
-    // const fetchConfig = {
-    //   method: "PUT",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Authorization": `Bearer ${localStorage.getItem("token")}`
-    //   },
-    // };
-
-    // const response = await fetch(editUrl, fetchConfig);
-
-    // if (response.ok) {
-    //     setPassword("")
-    //     setPassword("");
-    //     setSubmitted(true);
-    // }
-    // navigate("/account");
   };
 
   return (

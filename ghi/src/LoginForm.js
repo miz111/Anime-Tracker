@@ -1,27 +1,21 @@
-import React, {createContext} from "react";
+import React from "react";
 import { useState } from "react";
 import { useAuthContext, useToken } from "./auth";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const {userContext} = createContext();
   const [, login] = useToken();
-  const { isLoggedIn, setIsLoggedIn } = useAuthContext();
+  const { isLoggedIn } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // fetch("http://localhost:8000/token")
-    // .then(res => res.json())
-    // .then(data => console.log(data))
     const error = await login(username, password);
-    console.log(error)
     if (error) {
-      setIsLoggedIn(false);
+      isLoggedIn(false);
     } else {
-      setIsLoggedIn(true);
       navigate("/");
     }
   };
@@ -58,6 +52,7 @@ const LoginForm = () => {
                 />
                 <label htmlFor="password">Password</label>
               </div>
+
               <button type="submit" className="btn btn-funky-moon">
                 Log In
               </button>

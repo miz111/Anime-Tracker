@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext, useToken } from "./auth";
 
 const AccountEditForm = () => {
-  let { userdata } = useAuthContext();
+  let { userdata, user, setUser } = useAuthContext();
 
   const [submitted, setSubmitted] = useState(false);
   const [email, setEmail] = useState("");
@@ -13,9 +13,10 @@ const AccountEditForm = () => {
   const [last_name, setLastName] = useState("");
   const navigate = useNavigate();
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = { first_name, last_name, email, username, password};
+    const data = { first_name, last_name, email, username, password };
     const editUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/accounts/${userdata.id}`;
     const fetchConfig = {
       method: "PUT",
@@ -27,23 +28,20 @@ const AccountEditForm = () => {
     };
 
     const response = await fetch(editUrl, fetchConfig)
-    .then(res => res.json())
-    .then(data => {
-      userdata = data;
-     navigate("/AccountDetailView");
-    })
-    ;
+      .then(res => res.json())
+      .then(data => {
+        userdata = {
+          id: data.id,
+          first_name: first_name,
+          last_name: last_name,
+          email: email,
+          username: username
+        };
+        setUser(userdata);
+        navigate("/AccountDetailView");
+      })
+      ;
 
-    // if (response.ok) {
-    //   setEmail("");
-    //   setUsername("");
-    //   setPassword("");
-    //   setFirstName("");
-    //   setLastName("");
-    //   setSubmitted(true);
-    //  navigate("/AccountDetailView");
-
-    // }
   };
 
   return (

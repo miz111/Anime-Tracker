@@ -11,7 +11,7 @@ import AccountEditForm from "./AccountEditForm.js";
 import AccountDetailView from "./AccountDetailView.js";
 import { AuthProvider, useToken } from "./auth";
 import HomePage from "./HomePage.js";
-import EditPassword from "./EditPassword.jsx";
+
 
 
 const domain = /https:\/\/[^/]+/;
@@ -23,29 +23,8 @@ function GetToken() {
 }
 
 function App() {
-//   const [launch_info, setLaunchInfo] = useState([]);
-//   const [error, setError] = useState(null);
 
-//   useEffect(() => {
-//     async function getData() {
-//       let url = `${process.env.REACT_APP_ACCOUNTS}/api/launch-details`;
-//       console.log("fastapi url: ", url);
-//       let response = await fetch(url);
-//       console.log("------- hello? -------");
-//       let data = await response.json();
-
-//       if (response.ok) {
-//         console.log("got launch data!");
-//         setLaunchInfo(data.launch_details);
-//       } else {
-//         console.log("drat! something happened");
-//         setError(data.message);
-//       }
-//     }
-//     getData();
-//   }, []);
-
- return (
+  return (
     <BrowserRouter basename={basename}>
       <AuthProvider>
         <GetToken />
@@ -54,10 +33,9 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="signup" element={<SignUpForm />} />
-            <Route path="/Login" element={<LoginForm />} />   
+            <Route path="/Login" element={<LoginForm />} />
             <Route path="/AccountEditForm" element={<AccountEditForm />} />
             <Route path="/AccountDetailView" element={<AccountDetailView />} />
-            <Route path="/editpassword" element={<EditPassword />} />
           </Routes>
         </div>
       </AuthProvider>

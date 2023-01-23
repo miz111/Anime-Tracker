@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 let internalToken = null;
-let userdata = null;
 
 export function getToken() {
   return internalToken;
@@ -15,18 +14,10 @@ export async function getTokenInternal() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
-      // setUser({
-      //   first_name: data.account.first_name,
-      //   last_name: data.account.last_name,
-      //   username: data.account.username,
-      //   email: data.account.email
-      // })
-      userdata = data.account
       internalToken = data.access_token;
       return internalToken;
     }
-  } catch (e) {}
+  } catch (e) { }
   return false;
 }
 
@@ -38,7 +29,7 @@ function handleErrorMessage(error) {
       if ("__all__" in error) {
         error = error.__all__;
       }
-    } catch {}
+    } catch { }
   }
   if (Array.isArray(error)) {
     error = error.join("<br>");
@@ -74,7 +65,6 @@ export const AuthProvider = ({ children }) => {
         setUser,
         isLoggedIn,
         setIsLoggedIn,
-        userdata
       }}
     >
       {children}
@@ -85,15 +75,14 @@ export const AuthProvider = ({ children }) => {
 export const useAuthContext = () => useContext(AuthContext);
 
 export function useToken() {
-  const { token, setToken, user, setUser, setIsLoggedIn, userdata } = useAuthContext();
+  const { token, setToken, user, setUser, setIsLoggedIn } = useAuthContext();
   // const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
-      // console.log(token)
-      // setToken(token);
+      setToken(token);
     }
     if (!token) {
       fetchToken();
@@ -119,7 +108,6 @@ export function useToken() {
 
   async function login(username, password) {
     const url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`;
-    console.log(url)
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
@@ -127,10 +115,7 @@ export function useToken() {
       method: "post",
       credentials: "include",
       body: form,
-    })
-    // .then(res => res.json())
-    // .then(data => console.log(data))
-    // console.log(response)
+    });
     // const response2 = await fetch(
     //   `${process.env.REACT_APP_ACCOUNTS_API_HOST}/users/current`,
     //   {
@@ -151,25 +136,6 @@ export function useToken() {
     setIsLoggedIn(false);
     return handleErrorMessage(error);
   }
-    async function signup(username, password, email, firstName, lastName) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
-    const response = await fetch(url, {
-      method: "post",
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-        first_name: firstName,
-        last_name: lastName,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      await login(username, password);
-    }
-    return false;
-  }
-  return [token, login, signup, user];
+  return [token, login, user];
 }
+
