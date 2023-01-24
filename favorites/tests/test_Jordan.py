@@ -1,7 +1,11 @@
 from fastapi.testclient import TestClient
 from datetime import date
 from main import app
-from queries.favorites import *
+from queries.favorites import (
+    FavoriteOut,
+    FavoriteIn,
+    FavoriteRepository,
+)
 from authenticator import authenticator
 
 client = TestClient(app)
@@ -31,7 +35,8 @@ def test_create_favorite():
         user_id="1",
         anime_title="spy x family",
         date=date(2022, 1, 1),
-        img_url="https://www.google.com/imgres?imgurl=https%3A%2F%2Fd28hgpri8am2if.cloudfront.net%2Fbook_images%2Fonix%2Fcvr9781974718160%2Fspy-x-family-vol-3-9781974718160_hr.jpg&imgrefurl=https%3A%2F%2Fwww.simonandschuster.com%2Fbooks%2FSpy-x-Family-Vol-3%2FTatsuya-Endo%2FSpy-x-Family%2F9781974718160&tbnid=rIGY9QxJCAsxNM&vet=12ahUKEwie8Ze1itj8AhVM1lMKHTpwALMQMygCegUIARDkAQ..i&docid=E4VZ3WYuEJ896M&w=1400&h=2100&q=spy%20family&ved=2ahUKEwie8Ze1itj8AhVM1lMKHTpwALMQMygCegUIARDkAQ",
+        img_url=
+        "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
         )
     favorite_in.date = favorite_in.date.isoformat()
 
@@ -40,7 +45,8 @@ def test_create_favorite():
         user_id="1",
         anime_title="spy x family",
         date=date(2022, 1, 1),
-        img_url="https://www.google.com/imgres?imgurl=https%3A%2F%2Fd28hgpri8am2if.cloudfront.net%2Fbook_images%2Fonix%2Fcvr9781974718160%2Fspy-x-family-vol-3-9781974718160_hr.jpg&imgrefurl=https%3A%2F%2Fwww.simonandschuster.com%2Fbooks%2FSpy-x-Family-Vol-3%2FTatsuya-Endo%2FSpy-x-Family%2F9781974718160&tbnid=rIGY9QxJCAsxNM&vet=12ahUKEwie8Ze1itj8AhVM1lMKHTpwALMQMygCegUIARDkAQ..i&docid=E4VZ3WYuEJ896M&w=1400&h=2100&q=spy%20family&ved=2ahUKEwie8Ze1itj8AhVM1lMKHTpwALMQMygCegUIARDkAQ",
+        img_url=
+        "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
         )
 
     expected_favorite.date = expected_favorite.date.isoformat()
