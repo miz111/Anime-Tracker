@@ -150,4 +150,4 @@ Test function built. May need to clarify whether the test_create is enough or sh
 #### Date: 2023-01-23
 - Focus on frontend:
 Jess and Jordan started working on the deployment.
-Check with Jordan regarding the list view. I fixed the 405 error today. We also got suggested to simplify the token part. The worklist page now with a simpler hooks. Test the connection from frontend. The token and list works now.
+Check with Jordan regarding the list view. I fixed the 405 error today. We also got suggested to simplify the token part. The wishlist page now with a simpler hooks. Test the connection from frontend. The token and list works now.
