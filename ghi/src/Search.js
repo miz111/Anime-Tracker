@@ -5,6 +5,7 @@ import "./index.css";
 export function Search(query) {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isData, setIsData] = useState(true);
 
   useEffect(() => {
     const fetchResult = async () => {
@@ -13,8 +14,12 @@ export function Search(query) {
         `https://api.jikan.moe/v4/anime?q=${query}&sfw`
       );
       const data = await result.json();
+      if (data.length === 0) {
+        setIsData(false);
+      }
       setSearchResults(data.data);
       setIsLoading(false);
+      setIsData(true);
     };
     if (query) {
       fetchResult();
@@ -23,12 +28,12 @@ export function Search(query) {
     }
   }, [query]);
 
-  return { searchResults, isLoading };
+  return { searchResults, isLoading, isData};
 }
 
 export function SearchBar() {
   const [query, setQuery] = useState("");
-  const { searchResults, isLoading } = Search(query);
+  const { searchResults, isLoading, isData } = Search(query);
 
   function handleChange(event) {
     setQuery(event.target.value);
@@ -37,6 +42,14 @@ export function SearchBar() {
   async function handleSubmit(event) {
     event.preventDefault();
     console.log("Searching for:", query);
+  }
+
+  if (isData === false) {
+    return (
+      <div>
+        <span>No results</span>
+      </div>
+    )
   }
 
   return (
