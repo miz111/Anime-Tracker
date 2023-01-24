@@ -1,106 +1,113 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuthContext } from "./auth";
 
-const Watchlist = () => {
-  const [watchlists, setWatchlists] = useState([]);
+export default function Watchlist() {
+  const { token } = useAuthContext();
+  const [anime, setAnime] = useState([]);
+  const [decodedUser, setDecodedUser] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  // First argument: state variable
-  // Second argument: function
-
-  const user = {
-    id: "1",
-  };
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlN2UyYmJlMS05Njc5LTQ1NWQtOTQ4MC0zYTJjZTBmM2ExZTUiLCJleHAiOjE2NzQxNjAxMDIsInN1YiI6InN0cmluZyIsImFjY291bnQiOnsiaWQiOjEsImZpcnN0X25hbWUiOiJzdHJpbmciLCJsYXN0X25hbWUiOiJzdHJpbmciLCJlbWFpbCI6InN0cmluZyIsInVzZXJuYW1lIjoic3RyaW5nIn19.LxWLhQ0cPDvoSghMEdg2cUU1BWhbi9fNLaVZqNi3yZ0";
+  function parseJwt(token) {
+    console.log(token);
+    let base64Url = token.split(".")[1];
+    let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    let jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    const variable = JSON.parse(jsonPayload);
+    setDecodedUser(variable.account);
+  }
 
   useEffect(() => {
+    if (token !== null) {
+      parseJwt(token);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    console.log(decodedUser, "============decodedUser============");
     async function getWatchlist() {
-      const watchlistURL = `${process.env.REACT_APP_WATCHLISTS_API_HOST}/api/watchlists/${user.id}`;
+      const watchlistsURL = `${process.env.REACT_APP_WATCHLISTS_API_HOST}/api/watchlists/${decodedUser.id}`;
       const fetchConfig = {
         method: "GET",
         headers: {
-          Authentication: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
-      const response = await fetch(watchlistURL, fetchConfig);
+
+      const response = await fetch(watchlistsURL, fetchConfig);
       if (response.ok) {
-        const data = response.json();
-        setWatchlists(data.watchlists);
-      } else {
-        console.log("fetch error");
+        const data = await response.json();
+        setAnime(data.watchlists);
       }
     }
-    getWatchlist();
-  }, [watchlists, user.id, submitted]);
+    if (decodedUser) {
+      getWatchlist();
+    }
+  }, [token, decodedUser, submitted]);
 
-  const delWatchlist = async (watchlist) => {
-    const delURL = `${process.env.REACT_APP_WATCHLISTS_API_HOST}/watchlists/${user.id}/${watchlist.id}`;
+  const removeWatchlist = async (watchlist_id) => {
+    const removeURL = `${process.env.REACT_APP_WATCHLISTS_API_HOST}/api/watchlists/${decodedUser.id}/${watchlist_id}`;
     const fetchConfig = {
-      method: "DELETE",
+      method: "delete",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     };
-    const response = await fetch(delURL, fetchConfig);
+    const response = await fetch(removeURL, fetchConfig);
     if (response.ok) {
-      setWatchlists([...watchlist]);
+      setAnime([...anime]);
       setSubmitted(true);
     }
-
-    // function parseJwt (token) {
-    //     var base64Url = token.split('.')[1];
-    //     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    //     var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-    //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    //     }).join(''));
-
-    //     return JSON.parse(jsonPayload);
-    // }
-
-    return (
-      <>
-        <h1>Anime in Your Watch List</h1>
-        <table className="table table-dark table-striped">
-          <thead>
-            <tr>
-              <th>Anime Title</th>
-              <th>Date</th>
-              <th>Picture</th>
-              <th>Edit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {watchlists.map((watchlist) => {
-              return (
-                <tr key={watchlist.id}>
-                  <td>{watchlist.title}</td>
-                  <td>{watchlist.name}</td>
-                  <td>
-                    <img
-                      src={watchlist.img_url}
-                      alt={watchlist.title}
-                      width="20%"
-                      height="20%"
-                    />
-                  </td>
-                  <td>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => delWatchlist(watchlist.id)}
-                    >
-                      Cancel
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </>
-    );
   };
-};
-export default Watchlist;
+
+  return (
+    <>
+      <h1>Anime in your watchlist</h1>
+      <table className="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th>Anime Title</th>
+            <th>Air Date</th>
+            <th>Picture</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {anime.map((watchlist) => {
+            return (
+              <tr key={watchlist.id}>
+                <td>{watchlist.title}</td>
+                <td>{watchlist.date}</td>
+                <td>
+                  <img
+                    src={watchlist.img_url}
+                    alt={watchlist.title}
+                    width="50%"
+                    height="50%"
+                  />
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => removeWatchlist(watchlist.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
+  );
+}
