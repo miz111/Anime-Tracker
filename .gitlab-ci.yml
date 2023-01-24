@@ -33,15 +33,15 @@ favorites-unit-test-job:
     - export SIGNING_KEY="LjdTjfrjPYgUJHNDzM-dKQoBLIfC74fNnR_71DcJcgE"
     - python -m pytest
 
-# watchlists-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd watchlists
-#     - pip install -r requirements.txt
-#     - export DATABASE_URL="postgres://postgres:pass@srv-captain--watchlists-postgres/postgres"
-#     - export SIGNING_KEY="LjdTjfrjPYgUJHNDzM-dKQoBLIfC74fNnR_71DcJcgE"
-#     - python -m pytest
+watchlists-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd watchlists
+    - pip install -r requirements.txt
+    - export DATABASE_URL="postgres://postgres:pass@srv-captain--watchlists-postgres/postgres"
+    - export SIGNING_KEY="LjdTjfrjPYgUJHNDzM-dKQoBLIfC74fNnR_71DcJcgE"
+    - python -m pytest
 
 build-accounts-backend:
   image: docker:19.03.1

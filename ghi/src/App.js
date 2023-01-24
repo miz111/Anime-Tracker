@@ -5,6 +5,8 @@ import HomePage from "./HomePage.js";
 import "./App.css";
 import Favorites from "./Favorites";
 import FavoriteForm from "./FavoriteForm";
+import Watchlist from "./Watchlist.js";
+import WatchlistForm from "./WatchlistForm.js";
 import LoginForm from "./LoginForm";
 import Top100 from "./Top100";
 import Details from "./Details";
@@ -14,7 +16,6 @@ function GetToken() {
   useToken();
   return null;
 }
-
 
 export default function App() {
   const { token } = useAuthContext();
@@ -33,7 +34,9 @@ export default function App() {
               <Route path ="/Search/" element={<SearchList />} />
               <Route path="login/" element={<LoginForm />} />
               <Route path="favorites" element={<Favorites />} />
-              <Route path="favorites/new" element={<FavoriteForm />} /> */}
+              <Route path="favorites/new" element={<FavoriteForm />} />
+              <Route path="watchlist" element={<Watchlist />}/>
+              <Route path="watchlists/new" element={<WatchlistForm />}/>
             </Routes>
           </div>
         </AuthProvider>
