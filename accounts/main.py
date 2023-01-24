@@ -10,7 +10,8 @@ app.include_router(auth.authenticator.router)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.environ.get("CORS_HOST", "http://localhost:3000")
+        os.environ.get("CORS_HOST", "http://localhost:3000"),
+        # "https://catjj.gitlab.io/ani-reactor",
     ],
     allow_credentials=True,
     allow_methods=["*"],

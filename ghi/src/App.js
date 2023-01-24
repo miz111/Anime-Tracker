@@ -1,9 +1,11 @@
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Favorites from "./Favorites";
 import FavoriteForm from "./FavoriteForm";
 import LoginForm from "./LoginForm";
 import MainPage from "./MainPage";
 import { useToken, AuthContext, AuthProvider, useAuthContext } from "./auth";
+import Nav from "./Nav";
 
 function GetToken() {
   useToken();
@@ -19,14 +21,15 @@ export default function App() {
       <BrowserRouter>
         <AuthProvider>
           <GetToken />
-            <div>
-              <Routes>
-                <Route path="/" element={<MainPage />} />
-                <Route path="login/" element={<LoginForm />} />
-                <Route path="favorites" element={<Favorites />} />
-                <Route path="favorites/new" element={<FavoriteForm />} />
-              </Routes>
-            </div>
+          <Nav />
+          <div>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="login/" element={<LoginForm />} />
+              <Route path="favorites" element={<Favorites />} />
+              <Route path="favorites/new" element={<FavoriteForm />} />
+            </Routes>
+          </div>
         </AuthProvider>
       </BrowserRouter>
     </div>

@@ -4,7 +4,7 @@ import { useAuthContext, useToken } from "./auth";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const [token, login, user] = useToken();
+  const [, login] = useToken();
   const { isLoggedIn } = useAuthContext();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
