@@ -7,6 +7,7 @@ import HomePage from "./HomePage.js";
 import "./App.css";
 import Top100 from "./Top100.js";
 import Details from "./Details.js";
+import SearchList from "./SearchList.js";
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -42,6 +43,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/Top100/" element={<Top100 />} />
             <Route path="/:mal_id/" element={<Details />} />
+            <Route path ="/Search/" element={<SearchList />} />
           </Routes>
         </div>
       </BrowserRouter>

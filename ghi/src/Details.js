@@ -35,9 +35,9 @@ function Details () {
   if (isLoading) {
     return (
       <div>
-        <div class="spinner-border" role="status"></div>
+        <div className="spinner-border" role="status"></div>
         <div>
-          <h1>Loading . . . 🍆</h1>
+          <h1>Loading . . . </h1>
         </div>
       </div>
     );
@@ -82,7 +82,7 @@ function Details () {
           <div className="col order-2">
             <div className="row">
               <div className="col-sm left-detail">
-                <div className="card title">
+                <div className="card-title">
                   <h2>{details.title}</h2>
                   <div className="card-subtitle text-muted">
                     {details.title_japanese}
@@ -125,9 +125,8 @@ function Details () {
             </div>
             <hr></hr>
             <p>{details.synopsis}</p>
-            <div className="row">
-              <hr></hr>
-            </div>
+            <hr></hr>
+            <div className="row"></div>
           </div>
         </div>
       </div>

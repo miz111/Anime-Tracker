@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./index.css";
+import { SearchBar } from './Search.js'
 // import { useToken } from "./auth";
 
 
@@ -38,6 +39,9 @@ function Nav() {
                 <NavLink className="nav-link active" aria-current="page" to="/">
                   Home
                 </NavLink>
+              </li>
+              <li>
+                <SearchBar />
               </li>
               <div className="dropdown">
                 <button

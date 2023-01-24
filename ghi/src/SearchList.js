@@ -2,13 +2,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
+import { Search } from "./Search.js"
 
-function Top100() {
-	const [scrollHeight, setScrollHeight] = useState(0);
-	const [top100, setTop100] = useState([]);
-	const [overFlowData, setOverFlowData] = useState(true);
-	const [page, setPage] = useState(1);
-  const blueStar = require('./blueStar.png')
+function SearchList() {
+  const [scrollHeight, setScrollHeight] = useState(0);
+  const [top100, setTop100] = useState([]);
+  const [overFlowData, setOverFlowData] = useState(true);
+  const [page, setPage] = useState(1);
+  const blueStar = require("./blueStar.png");
 
   const handleScroll = (event) => {
     setScrollHeight(event.target.scrollTop);
@@ -18,24 +19,24 @@ function Top100() {
     }
   };
 
-  useEffect( () => {
-		const fetchData = async () => {
-			try {
-				const response = await fetch("https://api.jikan.moe/v4/top/anime");
-				const data = await response.json();
-				if (data.data.length === 0) {
-					setOverFlowData(false);
-					return;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://api.jikan.moe/v4/top/anime");
+        const data = await response.json();
+        if (data.data.length === 0) {
+          setOverFlowData(false);
+          return;
         }
-				setTop100(data.data);
-			}
-			catch(error) {
-				console.log(error);
+        setTop100(data.data);
+      } catch (error) {
+        console.log(error);
       }
-		};
+    };
 
     fetchData();
-	}, [page]);
+  }, [page]);
+
 
   return (
     <div
@@ -122,6 +123,6 @@ function Top100() {
       </ul>
     </div>
   );
-};
+}
 
-export default Top100;
+export default SearchList;
