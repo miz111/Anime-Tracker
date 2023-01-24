@@ -4,7 +4,7 @@ import Favorites from "./Favorites";
 import FavoriteForm from "./FavoriteForm";
 import LoginForm from "./LoginForm";
 import MainPage from "./MainPage";
-import { useToken, AuthContext, AuthProvider, useAuthContext } from "./auth";
+import { useToken, AuthProvider, useAuthContext } from "./auth";
 import Nav from "./Nav";
 
 function GetToken() {
