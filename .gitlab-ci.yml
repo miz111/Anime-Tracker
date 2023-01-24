@@ -3,14 +3,48 @@ stages:
   - build
   - deploy
 
-# Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye
   stage: test
   script:
     - pip install flake8
-    - flake8 sample_service
+    - flake8 accounts favorites watchlists
 
+accounts-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd accounts
+    - pip install -r requirements.txt
+    - export DATABASE_URL="postgres://postgres:pass@srv-captain--anime-postgres/postgres"
+    - export SIGNING_KEY="LjdTjfrjPYgUJHNDzM-dKQoBLIfC74fNnR_71DcJcgE"
+    - python -m pytest
+
+build-accounts-backend:
+  image: docker:19.03.1
+  stage: build
+  services:
+    - docker:19.03.1-dind
+  before_script:
+    - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
+    - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
+    - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
+    - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
+    - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
+
+  script:
+    - cs accounts
+    - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
+    - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/accounts:$COMMIT_HASH
+    - docker build -f ./Dockerfile --pull -t accounts_img .
+    - docker tag accounts_img "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - docker push "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+    - echo "Deploying on CapRover..."
+    - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+  only:
+    - master
 # Run the unit tests
 # api-unit-test-job:
 #   image: python:3-bullseye
