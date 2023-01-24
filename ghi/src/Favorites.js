@@ -47,7 +47,7 @@ export default function Favorites() {
       if (response.ok) {
         const data = await response.json();
         console.log(data.favorites)
-        setAnime(data.favorites);
+        setAnime();
       }
     }
     if (decodedUser) {
@@ -93,6 +93,7 @@ export default function Favorites() {
                     src={favorite.img_url}
                     width="20%"
                     height="20%"
+                    alt = "anime_img"
                   />
                 </td>
                 <td>
