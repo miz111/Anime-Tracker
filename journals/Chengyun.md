@@ -69,15 +69,85 @@ Since we have clarified the relationship as one to many, each account may leads 
 
   [x] Add owner property on queries
   [x] Check how to use info delivered by account/ token
+<br>
 
-  #### Date: 2023-01-11
+#### Date: 2023-01-11
   - Focus on coding: Applying the lecture of authentication.
   Followed advices, we re-built all container and tried the code introduced in the lecture.
   Jess, Jordan and I have been trying to apply the code and adjust the database setup to the demo.
   However, the account authentication still did not really work.
   We decided to save the code we have built for now and give the SQL a try.
+<br>
 
-  #### Date: 2023-01-12
-  ` Focus on project setup: Setting up the project with postgres and rebuild from beginning.
+#### Date: 2023-01-12
+  - Focus on project setup: Setting up the project with postgres and rebuild from beginning.
   Jess set up the postgres with dockers. We all help with checking the update.
-  Alvi review the merge request, so we now have a new main branch and everyone will work on the new branch.
+  Alvi approve the merge request.
+  We now have a new main branch and everyone will work on the new branch.
+<br>
+
+#### Date: 2023-01-13
+ - Focus on watchlist with new setting:
+ Check-in with backend team. Tommy also attend today.
+  Adjust code to fit the new setting. Work with Jess, Jordan on the account part. Check with Jordan on the way to do authentication. We eventually set up the environment.
+  Account service seems stable now. Get account service locally to test the authentication part.
+<br>
+
+#### Date: 2023-01-14
+ - Focus on watchlist with new setting:
+  Check-in with the back-end team.Jess and Jordan helped the application of the favorite and watchlist services, but tha authentication is still not working. Check with Jordan regarding the insomnia setting.
+
+<br>
+
+#### Date: 2023-01-15
+- Focus on watchlist authentication:
+  Check-in with the back-end team.Jess and Jordan helped the application of the favorite and watchlist services, but tha authentication is still not working.
+
+<br>
+
+#### Date: 2023-01-16
+- Focus on watchlist authentication:
+ Most authentication services on watchlist works, but I encounter some issue on get all part.
+
+<br>
+
+#### Date: 2023-01-17
+- Focus on watchlist authentication:
+Check with team on watchlist functionality. Jess and Jordan try to help and provide some suggestions. I also check with morning SEIRs, but the issue is still not solved (GET all watchlists in database). After discussion with Jess and Jordan, we agreed that it is not a functionality that user may need. Remove it for now, and I can comeback later if needed.
+Start drafting the front-end. Check the React Hook.
+
+<br>
+
+
+#### Date: 2023-01-18
+- Focus on watchlist authentication:
+Try a different method to do the authentication. However, on my part it is obviously not taken the token. Confirmed that the token is working (fastAPI token on the chrome). There is definitely something missing.Go back and check the frontend setting.
+
+<br>
+
+#### Date: 2023-01-19
+- Focus on watchlist authentication on frontend:
+Get help from Jess and Jordan. I checked the functionality built in our app and confirmed that backend is mostly working.
+We tried to decode of JWT token and get the account info. We tested a different way to deliver the token with hook.
+It seems working on the other services. I also try to apply that on my part.
+Noticed that the issue on the front end. Check again the authentication on frontend on the Learn. Noticed that I missed part of codes. Eventually, I am able to decode and find the account info on the console.
+
+<br>
+
+#### Date: 2023-01-20
+- Focus on watchlist authentication:
+Follow up on authentication. Noticed another error in the code. Take some time to identify the logic issue and fix the bug.
+I found a 422 validation error. It is basically due to missing value. Found that the backend is expecting the snake case. Fixed the bug. Still need to work on the broken frontend again.
+
+
+<br>
+
+#### Date: 2023-01-21
+- Focus on frontend:
+During the application of authentication. I broke the watch list page. Need to fix the issue of rendering. Still get 405 errors Method not allowed. This might be due to wrong url.
+Test function built. May need to clarify whether the test_create is enough or should I test more.
+
+#### Date: 2023-01-23
+- Focus on frontend:
+Jess and Jordan started working on the deployment.
+Check with Jordan regarding the list view. I fixed the 405 error today. We also got suggested to simplify the token part. The worklist page now with a simpler hooks. Test the connection from frontend. The token and list works now.
