@@ -8,7 +8,7 @@ export default function FavoriteForm() {
   const [animeTitle, setAnimeTitle] = useState("");
   const [date, setDate] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [jwt, setJwt] = useState(null);
+  // const [jwt, setJwt] = useState(null);
 
   function parseJwt(token) {
     console.log(token);
@@ -29,17 +29,19 @@ export default function FavoriteForm() {
   }
 
   useEffect(() => {
-    fetch(token).then((response) => {
-      if (typeof response.token !== "object") {
-        setJwt(token);
-        console.log(token);
-        if (jwt !== null) {
-          parseJwt(jwt);
-        }
-      }
-    });
-
-  }, [token, jwt]);
+    // fetch(token).then((response) => {
+    //   if (typeof response.token !== "object") {
+    //     setJwt(token);
+    //     console.log(token);
+    //     if (jwt !== null) {
+    //       parseJwt(jwt);
+    //     }
+    //   }
+    // });
+    if (token !== null) {
+      parseJwt(token)
+    }
+  }, [token]);
   console.log(decodedUser);
 
   const handleSubmit = async (event) => {
