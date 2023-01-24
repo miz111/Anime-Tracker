@@ -23,15 +23,15 @@ accounts-unit-test-job:
     - export SIGNING_KEY="LjdTjfrjPYgUJHNDzM-dKQoBLIfC74fNnR_71DcJcgE"
     - python -m pytest
 
-# favorites-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd favorites
-#     - pip install -r requirements.txt
-#     - export DATABASE_URL="postgres://postgres:pass@srv-captain--favorites-postgres/postgres"
-#     - export SIGNING_KEY="LjdTjfrjPYgUJHNDzM-dKQoBLIfC74fNnR_71DcJcgE"
-#     - python -m pytest
+favorites-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd favorites
+    - pip install -r requirements.txt
+    - export DATABASE_URL="postgres://postgres:pass@srv-captain--favorites-postgres/postgres"
+    - export SIGNING_KEY="LjdTjfrjPYgUJHNDzM-dKQoBLIfC74fNnR_71DcJcgE"
+    - python -m pytest
 
 # watchlists-unit-test-job:
 #   image: python:3-bullseye
