@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useToken, AuthProvider, useAuthContext } from "./auth";
 import Nav from "./Nav";
 import HomePage from "./HomePage.js";
 import "./App.css";
 import Favorites from "./Favorites";
 import FavoriteForm from "./FavoriteForm";
 import LoginForm from "./LoginForm";
-import MainPage from "./MainPage";
-import { useToken, AuthProvider, useAuthContext } from "./auth";
 import Top100 from "./Top100";
 import Details from "./Details";
 import SearchList from "./SearchList";
