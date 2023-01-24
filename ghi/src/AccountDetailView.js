@@ -6,28 +6,7 @@ const AccountDetailView = () => {
   const { user, setUser } = useAuthContext();
 
   const navigate = useNavigate();
-  // useEffect(async() => {
-  // setUser(userdata)
-  //   if (user == null) {
-  //     const Url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/accounts/${userdata.id}`;
-  //     const fetchConfig = {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Authorization": `Bearer ${localStorage.getItem("token")}`
-  //       },
-  //     };
-
-  //     const response = await fetch(Url, fetchConfig)
-  //       .then(res => res.json())
-  //       .then(data => {
-  //         console.log(data)
-  //         setUser(data)
-  //       })
-  //       ;
-  //   }
-  // }, []);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
   }

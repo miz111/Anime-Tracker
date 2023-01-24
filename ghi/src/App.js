@@ -13,7 +13,6 @@ import { AuthProvider, useToken } from "./auth";
 import HomePage from "./HomePage.js";
 
 
-
 const domain = /https:\/\/[^/]+/;
 const basename = process.env.PUBLIC_URL.replace(domain, "");
 

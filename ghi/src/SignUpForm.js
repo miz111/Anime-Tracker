@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useToken, useAuthContext } from "./auth";
 
 const SignUpForm = () => {
+  const [, login] = useToken();
+  const { isLoggedIn } = useAuthContext();
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -10,11 +12,9 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { token } = useAuthContext();
   const navigate = useNavigate();
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,15 +34,21 @@ const SignUpForm = () => {
     const response = await fetch(signupUrl, fetchConfig);
 
     if (response.ok) {
-      setFirstName("");
-      setLastName("");
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setSubmitted(true);
-      setIsAuthenticated(true);
+      e.preventDefault();
+      const error = await login(username, password);
+      if (error) {
+        isLoggedIn(false);
+      } else {
+        navigate("/");
+        setFirstName("");
+        setLastName("");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setSubmitted(true);
+        setIsAuthenticated(true);
+      }
     }
-    navigate("/Login");
   };
 
 
@@ -146,4 +152,5 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
+
 
