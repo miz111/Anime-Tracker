@@ -3,6 +3,9 @@ stages:
   - build
   - deploy
 
+# variables:
+#   CORS_HOST: https://catjj.gitlab.io/ani-reactor
+
 lint-test-job:
   image: python:3-bullseye
   stage: test
