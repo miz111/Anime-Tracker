@@ -4,6 +4,7 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
 from pydantic import BaseModel
 
+
 class AccountOut(BaseModel):
     id: int
     first_name: str
@@ -11,9 +12,11 @@ class AccountOut(BaseModel):
     email: str
     username: str
 
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="fastapi_token")
 SECRET_KEY = os.environ.get("SIGNING_KEY")
-COOKIE_NAME = 'fastapi_token'
+COOKIE_NAME = "fastapi_token"
+
 
 async def get_current_account_data(token: str = Depends(oauth2_scheme)):
     print(token)

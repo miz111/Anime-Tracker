@@ -2,7 +2,6 @@
 import os
 from pydantic import BaseModel
 from jwtdown_fastapi.authentication import Authenticator
-from fastapi import Depends, FastAPI, HTTPException, status, Request, Cookie
 
 
 class AccountOut(BaseModel):
@@ -12,8 +11,10 @@ class AccountOut(BaseModel):
     email: str
     username: str
 
+
 # class AccountOutWithPassword(AccountOut):
 #     hashed_password: str
+
 
 class MyAuthenticator(Authenticator):
     async def get_account_data(self):
