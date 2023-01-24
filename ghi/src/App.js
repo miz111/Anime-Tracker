@@ -1,41 +1,26 @@
-import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import HomePage from "./HomePage.js";
 import "./App.css";
-import Top100 from "./Top100.js";
-import Details from "./Details.js";
-import SearchList from "./SearchList.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Favorites from "./Favorites";
+import FavoriteForm from "./FavoriteForm";
+import LoginForm from "./LoginForm";
+import MainPage from "./MainPage";
+import { useToken, AuthProvider, useAuthContext } from "./auth";
+import Nav from "./Nav";
 
-function App() {
-  // const [launch_info, setLaunchInfo] = useState([]);
-  // const [error, setError] = useState(null);
+function GetToken() {
+  useToken();
+  return null;
+}
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     let url = `${process.env.REACT_APP_ACCOUNTS}/api/launch-details`;
-  //     console.log("fastapi url: ", url);
-  //     let response = await fetch(url);
-  //     console.log("------- hello? -------");
-  //     let data = await response.json();
 
-  //     if (response.ok) {
-  //       console.log("got launch data!");
-  //       setLaunchInfo(data.launch_details);
-  //     } else {
-  //       console.log("drat! something happened");
-  //       setError(data.message);
-  //     }
-  //   }
-  //   getData();
-  // }, []);
-
+export default function App() {
+  const { token } = useAuthContext();
+  console.log(token);
   return (
     <div>
-      {/* <ErrorNotification error={error} />
-      <Construct info={launch_info} /> */}
       <BrowserRouter>
         <Nav />
         <div className="container">
@@ -44,11 +29,16 @@ function App() {
             <Route path="/Top100/" element={<Top100 />} />
             <Route path="/:mal_id/" element={<Details />} />
             <Route path ="/Search/" element={<SearchList />} />
+            <Route path="login/" element={<LoginForm />} />
+            <Route path="favorites" element={<Favorites />} />
+            <Route path="favorites/new" element={<FavoriteForm />} /> */}
           </Routes>
         </div>
+      </BrowserRouter>
+            </Routes>
+          </div>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
 }
-
-export default App;

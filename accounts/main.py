@@ -1,16 +1,17 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-# from queries.accounts import AccountQueries
-# from pydantic import BaseModel
-from routers import accounts
+from routers import accounts, auth
 
 app = FastAPI()
+app.include_router(accounts.router)
+app.include_router(auth.authenticator.router)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.environ.get("CORS_HOST", "http://localhost:3000")
+        os.environ.get("CORS_HOST", "http://localhost:3000"),
+        # "https://catjj.gitlab.io/ani-reactor",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -40,11 +41,3 @@ app.include_router(accounts.router)
 #             "tz:": "PST"
 #         }
 #     }
-
-
-# @app.post('/api/accounts', response_model=AccountOut)
-# def create_account(
-#     new_account: AccountIn,
-#     account_queries: AccountQueries = Depends(),
-# ):
-#     return account_queries.create_account(new_account)
