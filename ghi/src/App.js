@@ -1,65 +1,65 @@
-import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
-import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginForm from "./LoginForm.js";
+import HomePage from "./HomePage.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Favorites from "./Favorites";
+import FavoriteForm from "./FavoriteForm";
 import Watchlist from "./Watchlist.js";
 import WatchlistForm from "./WatchlistForm.js";
-import { useToken, AuthContext, AuthProvider, useAuthContext } from "./auth";
-import HomePage from "./HomePage.js";
+import LoginForm from "./LoginForm";
+import MainPage from "./MainPage";
+import { useToken, AuthProvider, useAuthContext } from "./auth";
+import Nav from "./Nav";
+
 
 function GetToken() {
   useToken();
   return null;
 }
 
-
 function App() {
+  const [launch_info, setLaunchInfo] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function getData() {
+      let url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/launch-details`;
+      console.log("fastapi url: ", url);
+      let response = await fetch(url);
+      console.log("------- hello? -------");
+      let data = await response.json();
+
+      if (response.ok) {
+        console.log("got launch data!");
+        setLaunchInfo(data.launch_details);
+      } else {
+        console.log("drat! something happened");
+        setError(data.message);
+      }
+    }
+    getData();
+  }, []);
+
+export default function App() {
   const { token } = useAuthContext();
   console.log(token);
-
-  // const [launch_info, setLaunchInfo] = useState([]);
-  // const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     let url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/launch-details`;
-  //     console.log("fastapi url: ", url);
-  //     let response = await fetch(url);
-  //     console.log("------- hello? -------");
-  //     let data = await response.json();
-
-  //     if (response.ok) {
-  //       console.log("got launch data!");
-  //       setLaunchInfo(data.launch_details);
-  //     } else {
-  //       console.log("drat! something happened");
-  //       setError(data.message);
-  //     }
-  //   }
-  //   getData();
-  // }, []);
-
   return (
-    // <div>
-    //   <ErrorNotification error={error} />
-    //   <Construct info={launch_info} />
-    // </div>
-    <>
-    <BrowserRouter>
-    <AuthProvider>
-    <GetToken />
-    <Routes>
-    <Route path="/" element={<HomePage />} />
-    <Route path="login" element={<LoginForm />}/>
-    <Route path="watchlist" element={<Watchlist />}/>
-    <Route path="watchlists/new" element={<WatchlistForm />}/>
-    </Routes>
-    </AuthProvider>
-    </BrowserRouter>
-    </>
+    <div>
+      <BrowserRouter>
+        <AuthProvider>
+          <GetToken />
+          <Nav />
+          <div>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="login/" element={<LoginForm />} />
+              <Route path="favorites" element={<Favorites />} />
+              <Route path="favorites/new" element={<FavoriteForm />} />
+              <Route path="watchlist" element={<Watchlist />}/>
+              <Route path="watchlists/new" element={<WatchlistForm />}/>
+            </Routes>
+          </div>
+        </AuthProvider>
+      </BrowserRouter>
+    </div>
   );
 }
-
-export default App;
