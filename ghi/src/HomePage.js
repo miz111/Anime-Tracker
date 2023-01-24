@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "./index.css";
 // import "./Carousel.css";
-import { Link } from "react-router-dom";
 // import Carousel from "./Carousel";
 
 function HomePage() {
@@ -19,7 +18,7 @@ function HomePage() {
 
   console.log(popularEpisodes);
 
-  let test = JSON.stringify(popularEpisodes[0]);
+  // let test = JSON.stringify(popularEpisodes[0]);
 
 
 

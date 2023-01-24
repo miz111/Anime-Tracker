@@ -1,5 +1,4 @@
 import "./App.css";
-import HomePage from "./HomePage.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Favorites from "./Favorites";
 import FavoriteForm from "./FavoriteForm";
