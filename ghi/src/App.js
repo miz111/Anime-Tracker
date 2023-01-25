@@ -17,9 +17,11 @@ function GetToken() {
 export default function App() {
   const { token } = useAuthContext();
   console.log(token);
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
     <div>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <AuthProvider>
           <GetToken />
           <Nav />
@@ -29,8 +31,8 @@ export default function App() {
               <Route path="login/" element={<LoginForm />} />
               <Route path="favorites" element={<Favorites />} />
               <Route path="favorites/new" element={<FavoriteForm />} />
-              <Route path="watchlist" element={<Watchlist />}/>
-              <Route path="watchlists/new" element={<WatchlistForm />}/>
+              <Route path="watchlist" element={<Watchlist />} />
+              <Route path="watchlists/new" element={<WatchlistForm />} />
             </Routes>
           </div>
         </AuthProvider>
