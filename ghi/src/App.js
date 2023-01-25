@@ -11,8 +11,6 @@ import Nav from "./Nav";
 import SignUpForm from "./SignUpForm.js";
 import AccountEditForm from "./AccountEditForm.js";
 import AccountDetailView from "./AccountDetailView.js";
-import { AuthProvider, useToken } from "./auth";
-import HomePage from "./HomePage.js";
 
 
 const domain = /https:\/\/[^/]+/;
