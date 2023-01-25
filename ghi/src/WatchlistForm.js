@@ -40,17 +40,13 @@ export default function WatchlistForm() {
         }
       }
     });
-    // async function handleToken() {
-    //   let decodedToken1 = parseJwt(token);
-    //   return decodedToken1;
-    // }
-    // if (token) {
-    //   let decodedToken = parseJwt(token);
-
-    //   setDecodedUser(decodedToken.account);
-    //   console.log(decodedUser, "!!!!!!!!!!");
-    // }
   }, [token, jwt]);
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

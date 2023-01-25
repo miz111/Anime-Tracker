@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useInsertionEffect } from "react";
 import { useAuthContext } from "./auth";
+import { useNavigate } from "react-router-dom";
 
 export default function FavoriteForm() {
   const [decodedUser, setDecodedUser] = useState("");
@@ -8,7 +9,8 @@ export default function FavoriteForm() {
   const [animeTitle, setAnimeTitle] = useState("");
   const [date, setDate] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  // const [jwt, setJwt] = useState(null);
+  const navigate = useNavigate();
+
 
   function parseJwt(token) {
     console.log(token);
@@ -29,24 +31,17 @@ export default function FavoriteForm() {
   }
 
   useEffect(() => {
-    // fetch(token).then((response) => {
-    //   if (typeof response.token !== "object") {
-    //     setJwt(token);
-    //     console.log(token);
-    //     if (jwt !== null) {
-    //       parseJwt(jwt);
-    //     }
-    //   }
-    // });
     if (token !== null) {
       parseJwt(token)
     }
   }, [token]);
   console.log(decodedUser);
 
-  // useEffect(() => {
-  //   if (decodedUser )
-  // })
+  useEffect(() => {
+    if (!token) {
+      navigate("/login")
+    }
+  },[token, navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
