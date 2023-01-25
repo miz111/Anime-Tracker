@@ -1,4 +1,4 @@
-# Anime Reactor
+# Anime Reactor アニメ
 
 - Jess Zhang
 - Chengyun Lee
