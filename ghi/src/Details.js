@@ -29,7 +29,7 @@ function Details () {
     };
 
     fetchDetails();
-  }, []);
+  }, [mal_id]);
 
   if (isLoading) {
     return (
