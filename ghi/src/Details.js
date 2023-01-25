@@ -1,13 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./index.css";
 
 function Details () {
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [mal_id, setMal_Id] = useState(null);
   const {mal_id} = useParams();
   const blueStar = require('./blueStar.png')
 

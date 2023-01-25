@@ -1,42 +1,23 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
 
 function SearchList() {
-  const [scrollHeight, setScrollHeight] = useState(0);
+  // const [scrollHeight, setScrollHeight] = useState(0);
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [overFlowData, setOverFlowData] = useState(true);
-  const [page, setPage] = useState(1);
+  // const [overFlowData, setOverFlowData] = useState(true);
+  // const [page, setPage] = useState(1);
   const blueStar = require("./blueStar.png");
 
-  const handleScroll = (event) => {
-    setScrollHeight(event.target.scrollTop);
-    const { scrollHeight, clientHeight, scrollTop } = event.target;
-    if (scrollHeight - clientHeight === scrollTop && overFlowData) {
-      setPage(page + 1);
-    }
-  };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch("https://api.jikan.moe/v4/top/anime");
-  //       const data = await response.json();
-  //       if (data.data.length === 0) {
-  //         setOverFlowData(false);
-  //         return;
-  //       }
-  //       setTop100(data.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [page]);
+  // const handleScroll = (event) => {
+  //   setScrollHeight(event.target.scrollTop);
+  //   const { scrollHeight, clientHeight, scrollTop } = event.target;
+  //   if (scrollHeight - clientHeight === scrollTop && overFlowData) {
+  //     setPage(page + 1);
+  //   }
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();

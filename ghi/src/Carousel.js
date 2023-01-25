@@ -5,7 +5,6 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption,
 } from "reactstrap";
 // Reference documentation: https://reactstrap.github.io/?path=/docs/components-carousel--carousel
 

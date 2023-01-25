@@ -1,22 +1,21 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
 
 function Top100() {
-	const [scrollHeight, setScrollHeight] = useState(0);
+	// const [scrollHeight, setScrollHeight] = useState(0);
 	const [top100, setTop100] = useState([]);
 	const [overFlowData, setOverFlowData] = useState(true);
 	const [page, setPage] = useState(1);
   const blueStar = require('./blueStar.png')
 
-  const handleScroll = (event) => {
-    setScrollHeight(event.target.scrollTop);
-    const { scrollHeight, clientHeight, scrollTop } = event.target;
-    if (scrollHeight - clientHeight === scrollTop && overFlowData) {
-      setPage(page + 1);
-    }
-  };
+  // const handleScroll = (event) => {
+  //   setScrollHeight(event.target.scrollTop);
+  //   const { scrollHeight, clientHeight, scrollTop } = event.target;
+  //   if (scrollHeight - clientHeight === scrollTop && overFlowData) {
+  //     setPage(page + 1);
+  //   }
+  // };
 
   useEffect( () => {
 		const fetchData = async () => {
