@@ -12,6 +12,7 @@ import Top100 from "./Top100";
 import Details from "./Details";
 import SearchList from "./SearchList";
 
+
 function GetToken() {
   useToken();
   return null;
@@ -36,7 +37,7 @@ export default function App() {
               <Route path="favorites" element={<Favorites />} />
               <Route path="favorites/new" element={<FavoriteForm />} />
               <Route path="watchlist" element={<Watchlist />}/>
-              <Route path="watchlists/new" element={<WatchlistForm />}/>
+              <Route path="watchlist/new" element={<WatchlistForm />}/>
             </Routes>
           </div>
         </AuthProvider>

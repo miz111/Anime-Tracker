@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 
 
-
 class AccountIn(BaseModel):
     first_name: str
     last_name: str
@@ -9,6 +8,10 @@ class AccountIn(BaseModel):
     username: str
     password: str
 
+
 class AccountOut(BaseModel):
     id: str
     username: str
+
+
+# file end

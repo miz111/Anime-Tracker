@@ -1,23 +1,15 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./index.css";
-import { SearchBar } from './Search.js'
-// import { useToken } from "./auth";
+import { useToken } from "./auth";
 
 
 function Nav() {
-  // const [token] = useToken(); 
-
-  //  <li>
-  //    <NavLink className={token ? "d-none" : "nav-link"} to="login/">
-  //      Login
-  //    </NavLink>
-  //  </li>; 
-
+  const [token] = useToken();
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-success">
+      <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
             Ani-Reactor
@@ -36,24 +28,37 @@ function Nav() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink className="nav-link active" aria-current="page" to="/">
+                <NavLink className="nav-link" aria-current="page" to="/">
                   Home
                 </NavLink>
               </li>
-              {/* <li>
-                <SearchBar />
-              </li> */}
-              <div className="dropdown">
+              <li>
+                <NavLink className={token ? "d-none" : "nav-link"} to="login/">
+                  Login
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" aria-current="page" to="/top100/">
+                  Top 100
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" aria-current="page" to="Search/">
+                  Search
+                </NavLink>
+              </li>
+              <div className="dropdown" aria-current="page">
                 <button
                   className="btn btn-outline-light dropdown-toggle mr-1"
                   type="button"
                   id="dropdownMenuButton"
                   data-bs-toggle="dropdown"
                   data-bs-display="static"
+                  aria-current="page"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Creation Forms
+                  Favorites
                 </button>
                 <div
                   className="dropdown-menu"
@@ -62,74 +67,19 @@ function Nav() {
                   <li className="nav-item">
                     <Link
                       className="nav-link dropdown-item"
-                      to="/inventory/manufacturers/new"
+                      to="/favorites/"
                       id="dropdown"
                     >
-                      Manufacturers
+                      View Favorites
                     </Link>
                   </li>
                   <li className="nav-item">
                     <NavLink
                       className="nav-link dropdown-item"
-                      to="/inventory/models/new"
+                      to="favorites/new"
                       id="dropdown"
                     >
-                      Offered Models
-                    </NavLink>
-                  </li>
-                  
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/inventory/new"
-                      id="dropdown"
-                    >
-                      Vehicle Inventory
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/customer/new"
-                      id="dropdown"
-                    >
-                      Customer
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/salesperson/new"
-                      id="dropdown"
-                    >
-                      Sales Person
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link"
-                      to="/technicians/new"
-                      id="dropdown"
-                    >
-                      Technician
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link"
-                      to="/service/new"
-                      id="dropdown"
-                    >
-                      Service Request
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link"
-                      to="/salesrecord/new"
-                      id="dropdown"
-                    >
-                      Sales Record
+                      Add a Favorite
                     </NavLink>
                   </li>
                 </div>
@@ -144,7 +94,7 @@ function Nav() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Sales Department
+                  Watchlist
                 </button>
                 <div
                   className="dropdown-menu"
@@ -153,118 +103,19 @@ function Nav() {
                   <li className="nav-item">
                     <Link
                       className="nav-link dropdown-item"
-                      to="/salespeople/"
+                      to="/watchlist/"
                       id="dropdown"
                     >
-                      Sales Team
+                      View Your Watchlist
                     </Link>
                   </li>
                   <li className="nav-item">
                     <NavLink
                       className="nav-link dropdown-item"
-                      to="/customers/"
+                      to="/watchlist/new"
                       id="dropdown"
                     >
-                      Client List
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/salesrecords/"
-                      id="dropdown"
-                    >
-                      Sales Records
-                    </NavLink>
-                  </li>
-                </div>
-              </div>
-              <div className="dropdown">
-                <button
-                  className="btn btn-outline-light dropdown-toggle mr-1"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-bs-toggle="dropdown"
-                  data-bs-display="static"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Service Department
-                </button>
-                <div
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link dropdown-item"
-                      to="/technicians/"
-                      id="dropdown"
-                    >
-                      Technician Team
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/service/"
-                      id="dropdown"
-                    >
-                      Service Appointments
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/service/history/"
-                      id="dropdown"
-                    >
-                      Service History
-                    </NavLink>
-                  </li>
-                </div>
-              </div>
-              <div className="dropdown">
-                <button
-                  className="btn btn-outline-light dropdown-toggle mr-1"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-bs-toggle="dropdown"
-                  data-bs-display="static"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Inventory
-                </button>
-                <div
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link dropdown-item"
-                      to="/inventory/"
-                      id="dropdown"
-                    >
-                      Automobile Inventory
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/inventory/models/"
-                      id="dropdown"
-                    >
-                      Vehicle Models
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link dropdown-item"
-                      to="/inventory/manufacturers/"
-                      id="dropdown"
-                    >
-                      Vehicle Manufacturers
+                      Add to Your Watchlist
                     </NavLink>
                   </li>
                 </div>

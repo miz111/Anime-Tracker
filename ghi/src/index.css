@@ -13,6 +13,14 @@ code {
     monospace;
 }
 
+.navbar {
+  background-color: rgb(48,44,68)
+}
+
+.dropdown {
+  margin-left: 1rem;
+}
+
 .Rank {
   font-size: xx-large;
   font-weight: bold;
