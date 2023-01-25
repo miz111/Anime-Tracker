@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./auth";
-// test
 
 export default function Watchlist() {
   const { token } = useAuthContext();
