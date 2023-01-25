@@ -6,7 +6,7 @@ from queries.watchlists import (
     WatchlistOut,
     WatchlistRepository,
 )
-from authenticator import authenticator
+from routers import auth
 
 
 client = TestClient(app)
@@ -77,7 +77,7 @@ def test_create_watchlist():
 
     app.dependency_overrides[WatchlistRepository] = FakeWatchlistRepository
     app.dependency_overrides[
-        authenticator.get_current_account_data
+        auth.authenticator.get_current_account_data
     ] = FakeAuthenticator
 
     response = client.post("/api/watchlists", json=watchlist_in.dict())
