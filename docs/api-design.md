@@ -146,9 +146,9 @@
   {
   "favorites":[
       {
-          "id": string,
+          "user_id": string,
           "name": string,
-          "date": datetime,
+          "date": date,
           "image_url": string,
           }
       ]
@@ -179,9 +179,9 @@
   {
   "favorites":[
       {
-          "id": string,
+          "user_id": string,
           "name": string,
-          "date": datetime,
+          "date": date,
           "image_url": string,
           }
       ]
@@ -375,3 +375,4 @@ TBD: Might change to mal_id
     ]
   }
   ```
+  

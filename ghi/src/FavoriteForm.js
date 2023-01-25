@@ -44,6 +44,10 @@ export default function FavoriteForm() {
   }, [token]);
   console.log(decodedUser);
 
+  // useEffect(() => {
+  //   if (decodedUser )
+  // })
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 

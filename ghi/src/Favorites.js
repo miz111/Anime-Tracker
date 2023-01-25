@@ -47,7 +47,7 @@ export default function Favorites() {
       if (response.ok) {
         const data = await response.json();
         console.log(data.favorites)
-        setAnime();
+        setAnime(data.favorites);
       }
     }
     if (decodedUser) {
