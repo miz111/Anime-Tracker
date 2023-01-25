@@ -5,7 +5,7 @@ from queries.favorites import (
     FavoriteOut,
     FavoriteRepository,
 )
-from authenticator import authenticator
+from routers import auth
 
 router = APIRouter()
 
@@ -14,7 +14,7 @@ router = APIRouter()
 def get_all_for_user(
     user_id: int,
     repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(auth.authenticator.get_current_account_data),
 ):
     if account_data:
         return {"favorites": repo.get_all(user_id)}
@@ -24,7 +24,7 @@ def get_all_for_user(
 def create_favorite(
     favorite: FavoriteIn,
     repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(auth.authenticator.get_current_account_data),
 ):
     if account_data:
         return repo.create(favorite)
@@ -35,7 +35,7 @@ def delete_favorite(
     user_id: int,
     favorite_id: int,
     repo: FavoriteRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(auth.authenticator.get_current_account_data),
 ):
     if account_data:
         return repo.delete(user_id, favorite_id)

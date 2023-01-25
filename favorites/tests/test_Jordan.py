@@ -6,7 +6,7 @@ from queries.favorites import (
     FavoriteIn,
     FavoriteRepository,
 )
-from authenticator import authenticator
+from routers import auth
 
 client = TestClient(app)
 
@@ -57,7 +57,7 @@ def test_create_favorite():
     # second for get_current_account_data
     app.dependency_overrides[FavoriteRepository] = FakeFavoriteRespository
     app.dependency_overrides[
-        authenticator.get_current_account_data
+        auth.authenticator.get_current_account_data
     ] = FakeAuthenticator
     response = client.post("/favorites", json=favorite_in.dict())
     assert response.status_code == 200
