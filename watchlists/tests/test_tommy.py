@@ -56,7 +56,7 @@ def test_get_all_watchlists():
   app.dependency_overrides[
         authenticator.get_current_account_data
     ] = FakeAuthenticator
-  response = client.get("watchlists/")
+  response = client.get("/api/watchlists/1")
   assert response.status_code == 200
-  assert response.json()["watchlists"][0] == watchlist_db["watchlists"][0]
+  assert response.json()["watchlists"][0] == watchlist_db["watchlists"][1]
   app.dependency_overrides = {}
