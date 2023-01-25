@@ -40,9 +40,9 @@ function Nav() {
                   Home
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <SearchBar />
-              </li>
+              </li> */}
               <div className="dropdown">
                 <button
                   className="btn btn-outline-light dropdown-toggle mr-1"
