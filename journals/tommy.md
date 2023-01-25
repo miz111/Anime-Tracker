@@ -1,5 +1,9 @@
 ## January 25th 
 
+- Unit tests
+- Read Me 
+
+Today I asked my team to help me complete my unit tests. Alvi primarily helped me with the logic behind the unit tests and how to fix it. We successfully completed the unit tests. I also worked on taking the wireframes form the excalidraw we created so that we can input them in our Read Me. 
 
 ## January 24th 
 
@@ -20,7 +24,7 @@ Today I shared my screen to display what I had done to complete the MVP. After t
 
 - Frontend Forms (sign up form) 
 
-Today I was finally able to complete my sign up form! I needed to change a few things in the frontend auth file for it to work so I am extremely relieved that it is complete! I am excited to show my team what I have completed so far. 
+Today I was finally able to complete my sign up form! I needed to change a few things in the frontend auth file for it to work so I am extremely relieved that it is complete! I am excited to show my team what I have completed so far. I also figured out a new way to refactor the code which I never knew I could do before! 
 
 
 ## January 21st, 2023 
