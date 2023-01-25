@@ -12,16 +12,12 @@ import SignUpForm from "./SignUpForm.js";
 import AccountEditForm from "./AccountEditForm.js";
 import AccountDetailView from "./AccountDetailView.js";
 
-const domain = /https:\/\/[^/]+/;
-const basename = process.env.PUBLIC_URL.replace(domain, "");
-
 function GetToken() {
   useToken();
   return null;
 }
 export default function App() {
   const { token } = useAuthContext();
-  console.log(token);
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
