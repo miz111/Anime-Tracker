@@ -21,7 +21,7 @@ We are targeting general anime enjoyers that want to be up to date for the lates
 - Users to the site can sign-up for an account to use features that come with the site.
     - A watchlist allows users to save into their watchlist to watch an anime series later.
     - A favorites feature allows users to save their all time series into their favorites list.
-    - Detailed view of an anime series and will have links to streaming services that will redirect you a streaming site.
+    - Detailed view of an anime series and will have links to streaming services that will redirect you to a streaming site.
 - Users can search up any anime titles from OVAs to movies.
 
 ## Running the app
@@ -34,4 +34,3 @@ We are targeting general anime enjoyers that want to be up to date for the lates
 5. Run `docker compose build`
 6. Run `docker compose up`
 7. Now go watch some anime
-
