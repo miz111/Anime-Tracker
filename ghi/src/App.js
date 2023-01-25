@@ -18,6 +18,7 @@ function GetToken() {
 }
 export default function App() {
   const { token } = useAuthContext();
+  console.log(token);
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
