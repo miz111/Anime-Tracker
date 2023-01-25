@@ -29,7 +29,7 @@ function Details () {
     };
 
     fetchDetails();
-  }, [`https://api.jikan.moe/v4/anime/${mal_id}/full`]);
+  }, []);
 
   if (isLoading) {
     return (

@@ -5,8 +5,8 @@ import "./index.css";
 function Top100() {
 	// const [scrollHeight, setScrollHeight] = useState(0);
 	const [top100, setTop100] = useState([]);
-	const [overFlowData, setOverFlowData] = useState(true);
-	const [page, setPage] = useState(1);
+	// const [overFlowData, setOverFlowData] = useState(true);
+	// const [page, setPage] = useState(1);
   const blueStar = require('./blueStar.png')
 
   // const handleScroll = (event) => {
@@ -23,7 +23,7 @@ function Top100() {
 				const response = await fetch("https://api.jikan.moe/v4/top/anime");
 				const data = await response.json();
 				if (data.data.length === 0) {
-					setOverFlowData(false);
+					// setOverFlowData(false);
 					return;
         }
 				setTop100(data.data);
@@ -34,7 +34,7 @@ function Top100() {
 		};
 
     fetchData();
-	}, [page]);
+	}, []);
 
   return (
     <div
