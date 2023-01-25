@@ -2,11 +2,14 @@ from typing import Optional, Union, List
 from queries.pool import pool
 from pydantic import BaseModel
 
+
 class Error(BaseModel):
     message: str
 
+
 class DuplicateAccountError(ValueError):
     pass
+
 
 class AccountIn(BaseModel):
     first_name: str
@@ -15,6 +18,7 @@ class AccountIn(BaseModel):
     username: str
     password: str
 
+
 class AccountOut(BaseModel):
     id: int
     first_name: str
@@ -22,8 +26,10 @@ class AccountOut(BaseModel):
     email: str
     username: str
 
+
 class AccountOutWithPassword(AccountOut):
     hashed_password: str
+
 
 class AccountQueries:
     def get_one(self, username: str) -> Optional[AccountOutWithPassword]:
@@ -41,7 +47,7 @@ class AccountQueries:
                         FROM users
                         WHERE username = %s
                         """,
-                        [username]
+                        [username],
                     )
                     record = result.fetchone()
                     print("record!!!!!!!", record)
@@ -67,7 +73,7 @@ class AccountQueries:
                         FROM users
                         WHERE id = %s
                         """,
-                        [user_id]
+                        [user_id],
                     )
                     record = result.fetchone()
 
@@ -77,7 +83,6 @@ class AccountQueries:
         except Exception as e:
             print(e)
             return {"message": "Could not get that account"}
-
 
     def get_all(self) -> Union[Error, List[AccountOut]]:
         try:
@@ -109,7 +114,9 @@ class AccountQueries:
             print(e)
             return {"message": "Could not get all accounts"}
 
-    def update(self, user_id: int, account: AccountIn) -> Union[AccountOut, Error]:
+    def update(
+        self, user_id: int, account: AccountIn
+    ) -> Union[AccountOut, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -129,7 +136,7 @@ class AccountQueries:
                             account.email,
                             account.username,
                             account.password,
-                            user_id
+                            user_id,
                         ],
                     )
 
@@ -157,7 +164,9 @@ class AccountQueries:
             print(e)
             return {"message": "Could not delete account."}
 
-    def create(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
+    def create(
+        self, account: AccountIn, hashed_password: str
+    ) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -175,12 +184,14 @@ class AccountQueries:
                             account.email,
                             account.username,
                             hashed_password,
-                        ]
+                        ],
                     )
                     id = result.fetchone()[0]
                     old_data = account.dict()
 
-                    return AccountOutWithPassword(id=id, hashed_password=hashed_password, **old_data)
+                    return AccountOutWithPassword(
+                        id=id, hashed_password=hashed_password, **old_data
+                    )
                     # return AccountOutWithPassword(
                     #     id=record[0],
                     #     first_name=record[1],
@@ -190,13 +201,16 @@ class AccountQueries:
                     #     hashed_password=record[5],
                     #     )
 
-
         except Exception:
             return {"message": "Create did not work"}
 
-    def account_in_to_out(self, id: int, account: AccountIn, hashed_password: str):
+    def account_in_to_out(
+        self, id: int, account: AccountIn, hashed_password: str
+    ):
         old_data = account.dict()
-        return AccountOutWithPassword(id=id, hashed_password=hashed_password, **old_data)
+        return AccountOutWithPassword(
+            id=id, hashed_password=hashed_password, **old_data
+        )
 
     def record_to_account_out(self, record):
         return AccountOutWithPassword(
