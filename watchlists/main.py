@@ -7,8 +7,7 @@ app = FastAPI()
 app.include_router(router)
 
 origins = [
-    "http://localhost:3000",
-    os.environ.get("CORS_HOST", None),
+    os.environ.get("CORS_HOST", "http://localhost:3000"),
 ]
 
 app.add_middleware(
@@ -18,11 +17,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=[os.environ.get("CORS_HOST", "http://localhost:3000")],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
