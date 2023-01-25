@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./index.css";
-import { useToken, useAuthContext } from "./auth";
+import { useAuthContext } from "./auth";
 import Dropdown from 'react-bootstrap/Dropdown';
 import LogoutButton from "./LogoutForm.js"
 

@@ -1,4 +1,4 @@
-import { Link, useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToken, useAuthContext } from "./auth";
 
 function LogoutButton() {

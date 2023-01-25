@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "./auth";
 
 const AccountDetailView = () => {
-  const { user, setUser } = useAuthContext();
+  const { user } = useAuthContext();
 
   const navigate = useNavigate();
   
