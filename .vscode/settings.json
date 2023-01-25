@@ -3,7 +3,5 @@
   "python.formatting.provider": "black",
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  "python.analysis.typeCheckingMode": "off"
 }

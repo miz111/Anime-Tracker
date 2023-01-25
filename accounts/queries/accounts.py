@@ -115,8 +115,8 @@ class AccountQueries:
             return {"message": "Could not get all accounts"}
 
     def update(
-        self, user_id: int, account: AccountIn
-    ) -> Union[AccountOut, Error]:
+        self, user_id: int, account: AccountIn, hashed_password: str
+    ) -> Union[AccountOutWithPassword, Error]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -135,12 +135,11 @@ class AccountQueries:
                             account.last_name,
                             account.email,
                             account.username,
-                            account.password,
+                            hashed_password,
                             user_id,
                         ],
                     )
 
-                    # return self.account_in_to_out(user_id, account)
                     old_data = account.dict()
                     print(old_data)
                     return AccountOut(id=user_id, **old_data)
@@ -192,14 +191,6 @@ class AccountQueries:
                     return AccountOutWithPassword(
                         id=id, hashed_password=hashed_password, **old_data
                     )
-                    # return AccountOutWithPassword(
-                    #     id=record[0],
-                    #     first_name=record[1],
-                    #     last_name=record[2],
-                    #     email=record[3],
-                    #     username=record[4],
-                    #     hashed_password=record[5],
-                    #     )
 
         except Exception:
             return {"message": "Create did not work"}
