@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { token } = useAuthContext();
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ const SignUpForm = () => {
         setEmail("");
         setPassword("");
         setSubmitted(true);
-        setIsAuthenticated(true);
+        // setIsAuthenticated(true);
       }
     }
   };
@@ -124,19 +124,19 @@ const SignUpForm = () => {
           />
         </div>
       </div>
-      <div className="mb-3">
+      {/* <div className="mb-3">
         <label htmlFor="password" className="form-label">
           Confirm Password
         </label>
         <input
           required
-          onChange={(e) => setIsAuthenticated(e.target.value)}
+          // onChange={(e) => setIsAuthenticated(e.target.value)}
           type="password"
           className="form-control"
           id="confirm_password"
           placeholder="Confirm Password"
         />
-      </div>
+      </div> */}
       <button className="btn btn-primary">Create</button>
       {submitted && (
         <div className="success-message">

@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
 
 function HomePage() {
   const [popularEpisodes, setEpisodes] = useState([]);
@@ -14,10 +13,6 @@ function HomePage() {
       })
       .catch((error) => console.log("Error", error));
   }, []);
-
-
-  let test = JSON.stringify(popularEpisodes[0]);
-
 
 
   return (

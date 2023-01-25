@@ -5,7 +5,7 @@ import { useAuthContext } from "./auth";
 const AccountEditForm = () => {
   let { user, setUser } = useAuthContext();
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +41,7 @@ const AccountEditForm = () => {
         navigate("/AccountDetailView");
       })
       ;
+    console.log(response)
 
   };
 

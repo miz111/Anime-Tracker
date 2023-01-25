@@ -7,7 +7,7 @@ import LogoutButton from "./LogoutForm.js"
 
 
 function Nav() {
-  const { token, isLoggedIn } = useAuthContext();
+  const { isLoggedIn } = useAuthContext();
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-dark bg-success">
