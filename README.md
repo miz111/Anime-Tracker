@@ -30,8 +30,8 @@ We are targeting general anime enjoyers that want to be up to date for the lates
 1. Clone the repo down to your pc
 2. CD into project.
 3. Run `docker volume create pg-admin`
-    3.a Run `docker volume create postgres-data`
-4. Run `docker compose build`
-5. Run `docker compose up`
-6. Now go watch some anime
+4. Run `docker volume create postgres-data`
+5. Run `docker compose build`
+6. Run `docker compose up`
+7. Now go watch some anime
 
