@@ -1,26 +1,7 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import "./index.css";
-// import "./Carousel.css";
-// import Carousel from "./Carousel";
 
 function HomePage() {
-  const [popularEpisodes, setEpisodes] = useState([]);
-
-  useEffect(() => {
-    fetch("https://api.jikan.moe/v4/watch/episodes/popular")
-      .then((response) => response.json())
-      .then((data) => {
-        setEpisodes(data.data);
-      })
-      .catch((error) => console.log("Error", error));
-  }, []);
-
-  console.log(popularEpisodes);
-
-  // let test = JSON.stringify(popularEpisodes[0]);
-
-
 
   return (
     <div className="px-4 py-5 my-5 text-center">
@@ -32,7 +13,6 @@ function HomePage() {
       </div>
 
       <div>
-        {/* <Carousel /> */}
 
       </div>
 

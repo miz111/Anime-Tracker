@@ -17,7 +17,7 @@ export async function getTokenInternal() {
       internalToken = data.access_token;
       return internalToken;
     }
-  } catch (e) {}
+  } catch (e) { }
   return false;
 }
 
@@ -29,7 +29,7 @@ function handleErrorMessage(error) {
       if ("__all__" in error) {
         error = error.__all__;
       }
-    } catch {}
+    } catch { }
   }
   if (Array.isArray(error)) {
     error = error.join("<br>");
@@ -45,12 +45,15 @@ function handleErrorMessage(error) {
 export const AuthContext = createContext({
   token: null,
   setToken: () => null,
+  user: null,
+  setUser: () => null,
   isLoggedIn: null,
   setIsLoggedIn: () => null,
 });
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   return (
@@ -58,6 +61,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         token,
         setToken,
+        user,
+        setUser,
         isLoggedIn,
         setIsLoggedIn,
       }}
@@ -70,8 +75,8 @@ export const AuthProvider = ({ children }) => {
 export const useAuthContext = () => useContext(AuthContext);
 
 export function useToken() {
-  const { token, setToken, setIsLoggedIn } = useAuthContext();
-
+  const { token, setToken, user, setUser, setIsLoggedIn } = useAuthContext();
+  // const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,6 +89,23 @@ export function useToken() {
     }
   }, [setToken, token]);
 
+  // useEffect(() => {
+  //   async function fetchUsers() {
+  //     const response = await fetch(
+  //       `${process.env.REACT_APP_ACCOUNTS_API_HOST}/users/current`,
+  //       {
+  //         method: "get",
+  //         credentials: "include",
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     setUser(data);
+  //   }
+  //   if (token) {
+  //     fetchUsers();
+  //   }
+  // }, [setToken, token, setUser]);
+
   async function login(username, password) {
     const url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`;
     const form = new FormData();
@@ -94,11 +116,35 @@ export function useToken() {
       credentials: "include",
       body: form,
     });
+    // const response2 = await fetch(
+    //   `${process.env.REACT_APP_ACCOUNTS_API_HOST}/users/current`,
+    //   {
+    //     method: "get",
+    //     credentials: "include",
+    //   }
+    // );
+    // setUser(await response2.json());
 
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
       setIsLoggedIn(true);
+      fetch(`${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`, {
+        method: "GET",
+        credentials: "include",
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setUser({
+            id: data.account.id,
+            username: data.account.username,
+            first_name: data.account.first_name,
+            last_name: data.account.last_name,
+            email: data.account.email
+          })
+        })
+
       navigate("/");
       return;
     }
@@ -106,5 +152,8 @@ export function useToken() {
     setIsLoggedIn(false);
     return handleErrorMessage(error);
   }
-  return [token, login];
+  return [token, login, user];
 }
+
+
+
