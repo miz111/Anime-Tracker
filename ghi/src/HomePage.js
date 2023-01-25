@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import "./index.css";
 
 function HomePage() {
-  const [popularEpisodes, setEpisodes] = useState([]);
-
   useEffect(() => {
     fetch("https://api.jikan.moe/v4/watch/episodes/popular")
       .then((response) => response.json())
