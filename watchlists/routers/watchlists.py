@@ -5,7 +5,7 @@ from queries.watchlists import (
     WatchlistOut,
     WatchlistRepository,
 )
-from authenticator import authenticator
+from routers import auth
 
 router = APIRouter()
 
@@ -14,7 +14,7 @@ router = APIRouter()
 def create_watchlist(
     new_watchlist: WatchlistIn,
     repo: WatchlistRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(auth.authenticator.get_current_account_data),
 ):
     if account_data:
         return repo.create(new_watchlist)
@@ -24,7 +24,7 @@ def create_watchlist(
 def get_watchlist(
     user_id: int,
     repo: WatchlistRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(auth.authenticator.get_current_account_data),
 ):
     if account_data:
         return {"watchlists": repo.get_all(user_id)}
@@ -47,7 +47,7 @@ def delete_watchlist(
     user_id: int,
     watchlist_id: int,
     repo: WatchlistRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
+    account_data: dict = Depends(auth.authenticator.get_current_account_data),
 ):
     print("DEL: account data", account_data)
     print("DEL: repo", repo)
