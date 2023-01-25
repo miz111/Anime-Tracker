@@ -1,7 +1,5 @@
 import React from "react";
 import "./index.css";
-import "./Carousel.css";
-import Carousel from "./Carousel";
 
 function HomePage() {
 
@@ -15,7 +13,6 @@ function HomePage() {
       </div>
 
       <div>
-        <Carousel />
 
       </div>
 
