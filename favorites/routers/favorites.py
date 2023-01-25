@@ -39,3 +39,12 @@ def delete_favorite(
 ):
     if account_data:
         return repo.delete(user_id, favorite_id)
+
+
+# @router.get("/favorites", response_model=FavoriteList)
+# def get_all(
+#     repo: FavoriteRepository = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     if account_data:
+#         return {"favorites": repo.get_all}
