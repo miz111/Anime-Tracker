@@ -99,7 +99,7 @@ function Top100() {
                 <div className="item-status" align="center">
                   {item.status}
                   <div className="item-lastStatus" align="center">
-                    {item.aired.string.slice(15, -1)}
+                    {item.aired.string.slice(15)}
                   </div>
                 </div>
               </div>
