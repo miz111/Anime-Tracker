@@ -1,6 +1,5 @@
-import { useState, useEffect, useInsertionEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAuthContext } from "./auth";
-import { useNavigate } from "react-router-dom";
 
 export default function FavoriteForm() {
   const [decodedUser, setDecodedUser] = useState("");
@@ -9,7 +8,6 @@ export default function FavoriteForm() {
   const [animeTitle, setAnimeTitle] = useState("");
   const [date, setDate] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const navigate = useNavigate();
 
 
   function parseJwt(token) {
@@ -37,17 +35,11 @@ export default function FavoriteForm() {
   }, [token]);
   console.log(decodedUser);
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login")
-    }
-  },[token, navigate]);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const newFavorite = {
-      user_id: userID,
+      user_id: decodedUser,
       anime_title: animeTitle,
       date: date,
       img_url: imgUrl,
@@ -66,25 +58,25 @@ export default function FavoriteForm() {
     };
 
     const response = await fetch(favoriteUrl, fetchConfig);
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      setUserID("");
-      setAnimeTitle("");
-      setDate("");
-      setImgUrl("");
-    }
-  };
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setUserID("");
+          setAnimeTitle("");
+          setDate("");
+          setImgUrl("");
+        }
+  }
   return (
     <div className="row">
       <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
           <h1>Add your favorite Anime</h1>
           <form onSubmit={handleSubmit} id="create-bin-form">
-            <div className="form-floating mb-3">
+            {/* <div className="form-floating mb-3">
                             <label htmlFor='userID'>User ID</label>
                             <input value={userID} onChange={(e)=>setUserID(e.target.value)} placeholder="user_id" required type="text" name="user_id" id="user_id" className="form-control form-input" />
-                        </div>
+                        </div> */}
             <div className="form-floating mb-3">
               <label htmlFor="date">Anime Title</label>
               <input

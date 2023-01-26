@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./auth";
-import { useNavigate } from "react-router-dom";
-
 
 export default function Favorites() {
   const { token } = useAuthContext();
   const [anime, setAnime] = useState([]);
   const [decodedUser, setDecodedUser] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const navigate = useNavigate();
 
   function parseJwt(token) {
     console.log(token);
@@ -32,12 +29,6 @@ export default function Favorites() {
       parseJwt(token);
     }
   }, [token]);
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
-  }, [token, navigate]);
 
   useEffect(() => {
     console.log(decodedUser);
@@ -94,14 +85,14 @@ export default function Favorites() {
           {anime.map((favorite) => {
             return (
               <tr key={favorite.id}>
-                <td>{favorite.title}</td>
+                <td>{favorite.anime_title}</td>
                 <td>{favorite.date}</td>
                 <td>
                   <img
                     src={favorite.img_url}
+                    alt = {favorite.anime_title}
                     width="20%"
                     height="20%"
-                    alt = "anime_img"
                   />
                 </td>
                 <td>
@@ -109,7 +100,7 @@ export default function Favorites() {
                     className="btn btn-danger"
                     onClick={() => removeFavorite(favorite.id)}
                   >
-                    Cancel
+                    Delete
                   </button>
                 </td>
               </tr>

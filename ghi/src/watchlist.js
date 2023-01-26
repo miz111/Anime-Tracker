@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./auth";
-import { useNavigate } from "react-router-dom";
 
 export default function Watchlist() {
   const { token } = useAuthContext();
   const [anime, setAnime] = useState([]);
   const [decodedUser, setDecodedUser] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const navigate = useNavigate();
 
   function parseJwt(token) {
     console.log(token);
@@ -31,12 +29,6 @@ export default function Watchlist() {
       parseJwt(token);
     }
   }, [token]);
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
-  }, [token, navigate]);
 
   useEffect(() => {
     console.log(decodedUser, "============decodedUser============");
