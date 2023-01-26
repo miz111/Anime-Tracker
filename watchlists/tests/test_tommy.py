@@ -4,7 +4,7 @@ from queries.watchlists import (
     WatchlistOut,
     WatchlistRepository,
 )
-from authenticator import authenticator
+from routers import auth
 
 client = TestClient(app)
 watchlist_db = {
@@ -55,7 +55,7 @@ class FakeAuthenticator:
 def test_get_all_watchlists():
     app.dependency_overrides[WatchlistRepository] = FakeWatchlistRespository
     app.dependency_overrides[
-        authenticator.get_current_account_data
+        auth.authenticator.get_current_account_data
     ] = FakeAuthenticator
     response = client.get("/api/watchlists/1")
     assert response.status_code == 200
