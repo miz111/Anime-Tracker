@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./auth";
-import {useNavigate} from 'react-router-dom';
 
 
 export default function WatchlistForm() {
@@ -10,7 +9,6 @@ export default function WatchlistForm() {
   const [date, setDate] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [jwt, setJwt] = useState(null);
-  const navigate = useNavigate();
 
   function parseJwt(token) {
     console.log(token, "token inside decoding")
@@ -40,16 +38,6 @@ export default function WatchlistForm() {
         }
       }
     });
-    // async function handleToken() {
-    //   let decodedToken1 = parseJwt(token);
-    //   return decodedToken1;
-    // }
-    // if (token) {
-    //   let decodedToken = parseJwt(token);
-
-    //   setDecodedUser(decodedToken.account);
-    //   console.log(decodedUser, "!!!!!!!!!!");
-    // }
   }, [token, jwt]);
 
   const handleSubmit = async (event) => {
@@ -81,7 +69,6 @@ export default function WatchlistForm() {
       setTitle("");
       setDate("");
       setImgUrl("");
-      navigate("/");
     } else {
       console.log("Reset error");
     }
