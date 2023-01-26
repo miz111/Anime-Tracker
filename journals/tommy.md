@@ -3,7 +3,7 @@
 - Unit tests
 - Read Me 
 
-Today I asked my team to help me complete my unit tests. Alvi primarily helped me with the logic behind the unit tests and how to fix it. We successfully completed the unit tests. I also worked on taking the wireframes form the excalidraw we created so that we can input them in our Read Me. 
+Today I asked my team to help me complete my unit tests. Alvi primarily helped me with the logic behind the unit tests and how to fix it. We successfully completed the unit tests. I also worked on taking the wireframes form the excalidraw we created so that we can input them in our Read Me. We as a team specifically Alvi and Jess helped me merge into the main branch. We spend a lot of time waiting for the pipeline to complete. 
 
 ## January 24th 
 
