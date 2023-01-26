@@ -38,8 +38,9 @@ const AccountEditForm = () => {
           password: password
         }));
         navigate("/AccountDetailView");
+        console.log(response)
       };
-    console.log(response)
+      
 
   return (
     <form onSubmit={handleSubmit}>
