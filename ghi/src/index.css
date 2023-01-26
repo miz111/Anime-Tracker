@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	background-color: rgb(237, 241, 256);
 }
 
 code {
@@ -12,6 +13,58 @@ code {
     monospace;
 }
 
+.navbar {
+  background-color: rgb(48,44,68)
+}
+
+.dropdown {
+  margin-left: 1rem;
+}
+
+.Rank {
+  font-size: xx-large;
+  font-weight: bold;
+  color: rgba(5,75,173,255);
+}
+
+.card-title {
+  font-size: large;
+  font-weight: bold;
+}
+
+
+.results.table {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 24px;
+}
+
+.results-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.results {
+  display: grid;
+}
+
+
+.grid-item {
+  padding: 16px;
+}
+
+.left-detail {
+  width: 45%;
+  display: block;
+  float: right;
+}
+
+.badge-crunchyroll {
+  background-color: rgb(244, 117, 33);
+  color: white
+}
 .login-style {
   font-family: "Comfortaa", cursive;
 }
