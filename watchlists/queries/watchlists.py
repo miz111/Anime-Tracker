@@ -36,16 +36,6 @@ class WatchlistRepository:
         print("user id", user_id)
         connection = get_conn()
         with connection.cursor() as db:
-            # if user_id is None:
-            #     print("user_id is none")
-            #     db.execute(
-            #         """
-            #         SELECT *
-            #         FROM watchlists
-            #         """
-            #     )
-            # else:
-            #     print("user_id is not none")
             db.execute(
                 """
                     SELECT *
