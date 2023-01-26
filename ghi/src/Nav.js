@@ -51,7 +51,7 @@ function Nav() {
                   Search
                 </NavLink>
               </li>
-              <div className="dropdown" aria-current="page">
+              {token && <div className="dropdown" aria-current="page">
                 <button
                   className="btn btn-outline-light dropdown-toggle mr-1"
                   type="button"
@@ -87,8 +87,8 @@ function Nav() {
                     </NavLink>
                   </li>
                 </div>
-              </div>
-              <div className="dropdown">
+              </div>}
+              {token && <div className="dropdown">
                 <button
                   className="btn btn-outline-light dropdown-toggle mr-1"
                   type="button"
@@ -123,7 +123,7 @@ function Nav() {
                     </NavLink>
                   </li>
                 </div>
-              </div>
+              </div>}
             </ul>
             <Dropdown>
               <Dropdown.Toggle  id="dropdown-basic">
