@@ -10,7 +10,6 @@ export default function FavoriteForm() {
 
 
   function parseJwt(token) {
-    console.log(token);
     let base64Url = token.split(".")[1];
     let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     let jsonPayload = decodeURIComponent(
@@ -23,7 +22,6 @@ export default function FavoriteForm() {
         .join("")
     );
     const variable = JSON.parse(jsonPayload);
-    console.log(variable);
     setDecodedUser(variable.account.id);
   }
 
@@ -32,7 +30,6 @@ export default function FavoriteForm() {
       parseJwt(token)
     }
   }, [token]);
-  console.log(decodedUser);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,8 +40,6 @@ export default function FavoriteForm() {
       date: date,
       img_url: imgUrl,
     };
-    console.log(typeof newFavorite)
-    console.log(newFavorite)
     const favoriteUrl = `${process.env.REACT_APP_FAVORITES_API_HOST}/favorites`;
     const fetchConfig = {
       method: "post",

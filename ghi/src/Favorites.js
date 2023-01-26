@@ -8,7 +8,6 @@ export default function Favorites() {
   const [submitted, setSubmitted] = useState(false);
 
   function parseJwt(token) {
-    console.log(token);
     let base64Url = token.split(".")[1];
     let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     let jsonPayload = decodeURIComponent(
@@ -31,7 +30,6 @@ export default function Favorites() {
   }, [token]);
 
   useEffect(() => {
-    console.log(decodedUser);
     async function getFavorite() {
       const favoritesURL = `${process.env.REACT_APP_FAVORITES_API_HOST}/favorites/${decodedUser.id}`;
       const fetchConfig = {
