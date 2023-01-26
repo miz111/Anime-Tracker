@@ -4,7 +4,6 @@ import { useAuthContext } from "./auth";
 export default function FavoriteForm() {
   const [decodedUser, setDecodedUser] = useState("");
   const { token } = useAuthContext();
-  const [userID, setUserID] = useState("");
   const [animeTitle, setAnimeTitle] = useState("");
   const [date, setDate] = useState("");
   const [imgUrl, setImgUrl] = useState("");
@@ -61,7 +60,6 @@ export default function FavoriteForm() {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          setUserID("");
           setAnimeTitle("");
           setDate("");
           setImgUrl("");
