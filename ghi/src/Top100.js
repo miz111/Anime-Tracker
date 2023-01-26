@@ -50,9 +50,7 @@ function Top100() {
               </div>
               <div className="col-1">
                 <div className="card-img">
-                  <a
-                    href={`ani-reactor/${item.mal_id}`}
-                  >
+                  <a href={`/ani-reactor/${item.mal_id}`}>
                     <img
                       src={item.images.jpg.large_image_url}
                       alt={item.title}
