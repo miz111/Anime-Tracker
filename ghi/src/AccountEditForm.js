@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToken, useAuthContext } from "./auth";
+import { useAuthContext } from "./auth";
 
 const AccountEditForm = () => {
   let { user, setUser } = useAuthContext();
@@ -17,9 +17,6 @@ const AccountEditForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = { first_name, last_name, email, username, password };
-    console.log(data)
-    console.log(user.id)
-    console.log(token)
     const editUrl = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/api/accounts/${user.id}`;
     const fetchConfig = {
       method: "PUT",
