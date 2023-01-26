@@ -8,7 +8,6 @@ export default function Watchlist() {
   const [submitted, setSubmitted] = useState(false);
 
   function parseJwt(token) {
-    console.log(token);
     let base64Url = token.split(".")[1];
     let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     let jsonPayload = decodeURIComponent(
@@ -31,7 +30,6 @@ export default function Watchlist() {
   }, [token]);
 
   useEffect(() => {
-    console.log(decodedUser, "============decodedUser============");
     async function getWatchlist() {
       const watchlistsURL = `${process.env.REACT_APP_WATCHLISTS_API_HOST}/api/watchlists/${decodedUser.id}`;
       const fetchConfig = {

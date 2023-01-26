@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuthContext } from "./auth";
 
-
 export default function Favorites() {
   const { token } = useAuthContext();
   const [anime, setAnime] = useState([]);
@@ -9,7 +8,6 @@ export default function Favorites() {
   const [submitted, setSubmitted] = useState(false);
 
   function parseJwt(token) {
-    console.log(token);
     let base64Url = token.split(".")[1];
     let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     let jsonPayload = decodeURIComponent(
@@ -32,7 +30,6 @@ export default function Favorites() {
   }, [token]);
 
   useEffect(() => {
-    console.log(decodedUser);
     async function getFavorite() {
       const favoritesURL = `${process.env.REACT_APP_FAVORITES_API_HOST}/favorites/${decodedUser.id}`;
       const fetchConfig = {
@@ -86,14 +83,14 @@ export default function Favorites() {
           {anime.map((favorite) => {
             return (
               <tr key={favorite.id}>
-                <td>{favorite.title}</td>
+                <td>{favorite.anime_title}</td>
                 <td>{favorite.date}</td>
                 <td>
                   <img
                     src={favorite.img_url}
+                    alt = {favorite.anime_title}
                     width="20%"
                     height="20%"
-                    alt = "anime_img"
                   />
                 </td>
                 <td>
@@ -101,7 +98,7 @@ export default function Favorites() {
                     className="btn btn-danger"
                     onClick={() => removeFavorite(favorite.id)}
                   >
-                    Cancel
+                    Delete
                   </button>
                 </td>
               </tr>

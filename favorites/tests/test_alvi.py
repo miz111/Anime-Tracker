@@ -1,40 +1,38 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.watchlists import (
-    WatchlistOut,
-    WatchlistRepository,
-)
+from queries.favorites import FavoriteOut, FavoriteRepository
 from routers import auth
 
 client = TestClient(app)
-watchlist_db = {
-    "watchlists": [
-        {
-            "id": 1,
-            "user_id": 0,
-            "title": "Naruto",
-            "date": "2023-01-24",
-            "img_url": "Naruto.png",
-        },
+
+favorites_db = {
+    "favorites": [
         {
             "id": 7,
-            "user_id": 1,
-            "title": "My Hero Academia",
+            "user_id": 0,
+            "anime_title": "Bleach",
             "date": "2023-01-24",
-            "img_url": "MHA.jpg",
+            "img_url": "bleach.png",
+        },
+        {
+            "id": 8,
+            "user_id": 1,
+            "anime_title": "Attack on Titan",
+            "date": "2023-01-24",
+            "img_url": "aot.jpg",
         },
     ]
 }
 
 
-def set_watchlist_db():
-    return watchlist_db
+def set_favorites_db():
+    return favorites_db
 
 
-class FakeWatchlistRespository:
-    def get_all(self, user_id) -> list[WatchlistOut]:
+class FakeFavoriteRespository:
+    def get_all(self, user_id) -> list[FavoriteOut]:
         results = []
-        target_list = watchlist_db["watchlists"]
+        target_list = favorites_db["favorites"]
         for item in target_list:
             if item["user_id"] == user_id:
                 results.append(item)
@@ -52,12 +50,12 @@ class FakeAuthenticator:
         }
 
 
-def test_get_all_watchlists():
-    app.dependency_overrides[WatchlistRepository] = FakeWatchlistRespository
+def test_get_all_favorites():
+    app.dependency_overrides[FavoriteRepository] = FakeFavoriteRespository
     app.dependency_overrides[
         auth.authenticator.get_current_account_data
     ] = FakeAuthenticator
-    response = client.get("/api/watchlists/1")
+    response = client.get("/favorites/1")
     assert response.status_code == 200
-    assert response.json()["watchlists"][0] == watchlist_db["watchlists"][1]
+    assert response.json()["favorites"][0] == favorites_db["favorites"][1]
     app.dependency_overrides = {}
