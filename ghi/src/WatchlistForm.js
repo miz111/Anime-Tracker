@@ -54,7 +54,7 @@ export default function WatchlistForm() {
 
     const response = await fetch(watchlistUrl, fetchConfig);
     if (response.ok) {
-      const data = await response.json();
+      // const data = await response.json();
       setTitle("");
       setDate("");
       setImgUrl("");
