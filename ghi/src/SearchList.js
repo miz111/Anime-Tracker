@@ -64,9 +64,7 @@ function SearchList() {
                   <div className="col-1">
                     <div className="card-img">
                       <a
-                        href={`/${item.mal_id}`}
-                        target={item.mal_id}
-                        rel="noreferrer"
+                        href={`${item.mal_id}`}
                       >
                         <img
                           src={item.images.jpg.large_image_url}
