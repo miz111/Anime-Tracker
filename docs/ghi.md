@@ -1,38 +1,36 @@
 # Customer Graphical Human Interface 
 
-## Home Page
+## Dropdown Menu
+<img src="./Dropdown.png" />
 
-This will be the first page that the consumer will observe. There will be a drop down with the fields of account details, account edit form, watchlist form, and favorites form. 
-
+## Main Page
+When visitors visit our page they will see the main page with a carousel of popular anime! 
 <img src="./Mainpage.png" />
 
+## Top 100
+Once they are signed in they will be able to scroll through the most highly ranked anime from other users.
+<img src="./Top100.png" />
 
-## Home Page (Logged in)
+## Search List
+If someone knwos what they want to view or if they want to adventure the website they will be able to use the search function. 
+<img src="./SearchList.png" />
 
-<img src="./User login mainpage.png" />
+## Anime Detail View 
+When a visitor clicks on an anime it will show details to help them understand what the anime will be about and possibly spark their interest in that anime. 
+<img src="./AnimeDetailView.png" />
 
+## Sign Up Form
+The sign up form will require the users first name, last name, email address, username, and password. 
+<img src="./Signup.png" />
 
-## Sign-up Form 
-
-The sign up for will display the fields of first name, last name, email, username, password, and a confirm password field. After the individual signs up it will redirect them to the mainpage with all of the features.
-
-<img src="./Sign-up.png" />
-
-## Login Form 
-
-If a returning account has gone through the sign up process they need to log in with their unique username and password fields. 
-
+## Login
+When a returning user comes back to the website they will be able to log into their account to access members only access of a customized favorites and watchlist page.
 <img src="./Login.png" />
 
+## Account Detail View 
+The user can see what their account information by clicking the view account button. This will present their current information. 
+<img src="./AccountDetailView.png" />
 
-## Account Details 
-
-<img src="./Account Details.png" />
-
-## Edit Profile Form
-
-<img src="./Edit Profile Form.png" />
-
-## Search List 
-
-<img src="./Search List.png" />
+## Profile Edit Form
+If for some reason the user wants to change their information, they can proceed to the profile edit form to change their first name, last name, username, password, or email address. 
+<img src="./ProfileEdit.png" />

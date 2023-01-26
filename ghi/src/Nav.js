@@ -10,7 +10,6 @@ function Nav() {
   const [token] = useToken();
   const { isLoggedIn } = useAuthContext();
 
-
   return (
     <header>
       <nav className="navbar navbar-expand-lg">
@@ -130,47 +129,29 @@ function Nav() {
                 <span className="navbar-toggler-icon"></span>
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <div
-                  className=""
-                  id="navbarSupportedContent"
-                  aria-labelledby="dropdown"
-                >
-                  <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    {isLoggedIn ? (
-                      <></>
-                    ) : (
-                      <li className="nav-item">
-                        <NavLink
-                          className="nav-link text-black"
-                          aria-current="page"
-                          to="/signup"
-                        >
-                          Sign Up
-                        </NavLink>
-                      </li>
-                    )}
-                  </ul>
-                  <div className="navbar-end">
-                    {isLoggedIn ? (
-                      <>
-                        <NavLink className="btn" to="/AccountDetailView">
-                          View Account
-                        </NavLink>
-                        <NavLink className="btn" to="/AccountEditForm">
-                          Edit Profile
-                        </NavLink>
-                        <NavLink className="btn" to="#">
-                          Watchlist
-                        </NavLink>
-                        <NavLink className="btn" to="#">
-                          Favorites List
-                        </NavLink>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
+            <Dropdown.Menu>
+
+
+              <div className="" id="navbarSupportedContent" aria-labelledby="dropdown">
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                  {isLoggedIn ? (<></>) :
+                    <li className="nav-item">
+                      <NavLink className="nav-link text-black" aria-current="page" to="/signup">
+                        Sign Up
+                      </NavLink>
+                    </li>
+                  }
+                </ul>
+                <div className="navbar-end">
+
+                  {isLoggedIn ? (
+                    <>
+                      <NavLink className="btn" to="/AccountDetailView">
+                        View Account
+                      </NavLink>
+                      <NavLink className="btn" to="/AccountEditForm">Edit Profile</NavLink>
+                    </>
+                  ) : <></>}
                 </div>
 
                 <div className="navbar-item mb-2">
@@ -182,6 +163,8 @@ function Nav() {
                     </NavLink>
                   )}
                 </div>
+              <div/>
+              </div>
               </Dropdown.Menu>
             </Dropdown>
           </div>

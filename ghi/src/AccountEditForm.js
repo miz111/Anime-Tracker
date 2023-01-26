@@ -4,7 +4,7 @@ import { useAuthContext } from "./auth";
 
 const AccountEditForm = () => {
   let { user, setUser } = useAuthContext();
-
+  const { token } = useAuthContext();
   const [submitted] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -23,13 +23,12 @@ const AccountEditForm = () => {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
+        "Authorization": `Bearer ${token}`
       },
     };
+    
 
     const response = await fetch(editUrl, fetchConfig)
-      .then(res => res.json())
-      .then(data => {
         setUser(prev => ({
           ...prev,
           first_name: first_name,
@@ -39,11 +38,9 @@ const AccountEditForm = () => {
           password: password
         }));
         navigate("/AccountDetailView");
-      })
-      ;
-    console.log(response)
-
-  };
+        console.log(response)
+      };
+      
 
   return (
     <form onSubmit={handleSubmit}>

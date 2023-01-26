@@ -1,9 +1,10 @@
 ## January 25th 
 
 - Unit tests
-- Read Me 
+- Read Me
+- Frontend Forms (Account Edit Form)
 
-Today I asked my team to help me complete my unit tests. Alvi primarily helped me with the logic behind the unit tests and how to fix it. We successfully completed the unit tests. I also worked on taking the wireframes form the excalidraw we created so that we can input them in our Read Me. 
+Today I asked my team to help me complete my unit tests. Alvi primarily helped me with the logic behind the unit tests and how to fix it. We successfully completed the unit tests. I also worked on taking the wireframes form the excalidraw we created so that we can input them in our Read Me. We as a team specifically Alvi and Jess helped me merge into the main branch. We spend a lot of time waiting for the pipeline to complete. After the third attentance token I had an error that my token was not following me when I signed in and edited after merging and deploying. I shared my screen with the team to see what the problem could be. We spent close to an hour trying to figure the cause of the problem so I reached out to a seir to help me with 401 error I was gettign everytime I changed my profile information. We spent about half an hour assessing what the problem could be and Robbie helped me solve the problem with a few tiny changes in the code so I was estatic! 
 
 ## January 24th 
 
