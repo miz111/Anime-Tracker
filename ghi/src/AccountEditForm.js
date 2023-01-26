@@ -26,6 +26,7 @@ const AccountEditForm = () => {
         "Authorization": `Bearer ${token}`
       },
     };
+    
 
     const response = await fetch(editUrl, fetchConfig)
         setUser(prev => ({
@@ -38,7 +39,7 @@ const AccountEditForm = () => {
         }));
         navigate("/AccountDetailView");
       };
-    
+    console.log(response)
 
   return (
     <form onSubmit={handleSubmit}>
