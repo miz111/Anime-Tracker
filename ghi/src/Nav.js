@@ -41,8 +41,6 @@ function Nav() {
                         View Account
                       </NavLink>
                       <NavLink className="btn" to="/AccountEditForm">Edit Profile</NavLink>
-                      <NavLink className="btn" to="#">Watchlist</NavLink>
-                      <NavLink className="btn" to="#">Favorites List</NavLink>
                     </>
                   ) : <></>}
                 </div>
