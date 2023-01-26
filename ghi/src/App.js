@@ -34,7 +34,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/Top100/" element={<Top100 />} />
-              <Route path="/:mal_id/" element={<Details />} />
+              <Route path="ani-reactor/:mal_id/" element={<Details />} />
               <Route path="/Search/" element={<SearchList />} />
               <Route path="login/" element={<LoginForm />} />
               <Route path="favorites" element={<Favorites />} />
