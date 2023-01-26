@@ -10,7 +10,6 @@ function Nav() {
   const [token] = useToken();
   const { isLoggedIn } = useAuthContext();
 
-
   return (
     <header>
       <nav className="navbar navbar-expand-lg">
@@ -164,6 +163,8 @@ function Nav() {
                     </NavLink>
                   )}
                 </div>
+              <div/>
+              </div>
               </Dropdown.Menu>
             </Dropdown>
           </div>
