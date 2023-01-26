@@ -352,8 +352,6 @@ TBD: Might change to mal_id
 - Endpoint method: GET
 - Query parameters:
 
-  - tv, Movie, ova, special
-
 - Headers:
 
   - Authorization: Bearer token

@@ -52,8 +52,6 @@ function Top100() {
                 <div className="card-img">
                   <a
                     href={`ani-reactor/${item.mal_id}`}
-                    target={item.mal_id}
-                    rel="noreferrer"
                   >
                     <img
                       src={item.images.jpg.large_image_url}
@@ -66,7 +64,7 @@ function Top100() {
               <div className="col-auto"></div>
               <div className="col-5">
                 <div className="card-body">
-                  <a href={`ani-reactor/${item.mal_id}`}>
+                  <a href={`/ani-reactor/${item.mal_id}`}>
                     <div className="card-title">
                       {item.title_english}
                       <div className="card-subtitle mb-2 text-muted">
@@ -99,7 +97,7 @@ function Top100() {
                 <div className="item-status" align="center">
                   {item.status}
                   <div className="item-lastStatus" align="center">
-                    {item.aired.string.slice(15, -1)}
+                    {item.aired.string.slice(15)}
                   </div>
                 </div>
               </div>
