@@ -63,9 +63,7 @@ function SearchList() {
                   </div>
                   <div className="col-1">
                     <div className="card-img">
-                      <a
-                        href={`${item.mal_id}`}
-                      >
+                      <a href={`/ani-reactor/${item.mal_id}`}>
                         <img
                           src={item.images.jpg.large_image_url}
                           alt={item.title}
@@ -77,7 +75,7 @@ function SearchList() {
                   <div className="col-auto"></div>
                   <div className="col-5">
                     <div className="card-body">
-                      <a href={`/${item.mal_id}`}>
+                      <a href={`/ani-reactor/${item.mal_id}`}>
                         <div className="card-title">
                           {item.title_english}
                           <div className="card-subtitle mb-2 text-muted">
