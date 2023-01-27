@@ -105,6 +105,16 @@ export function useToken() {
   //     fetchUsers();
   //   }
   // }, [setToken, token, setUser]);
+  async function logout() {
+    if (token) {
+      const url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`;
+      await fetch(url, { method: "delete", credentials: "include" });
+      internalToken = null;
+      setToken(null);
+      navigate("/");
+      setIsLoggedIn(false);
+    }
+  }
 
   async function login(username, password) {
     const url = `${process.env.REACT_APP_ACCOUNTS_API_HOST}/token`;
@@ -152,7 +162,7 @@ export function useToken() {
     setIsLoggedIn(false);
     return handleErrorMessage(error);
   }
-  return [token, login, user];
+  return [token, login, user, logout];
 }
 
 
