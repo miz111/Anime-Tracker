@@ -12,6 +12,3 @@ class AccountIn(BaseModel):
 class AccountOut(BaseModel):
     id: str
     username: str
-
-
-# file end
