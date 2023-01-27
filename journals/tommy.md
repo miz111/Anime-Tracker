@@ -1,3 +1,10 @@
+## January 26th
+
+- Frontend Fixes (Logout button token)
+
+Today I recieved help from James to solve an issue I was recieving from my logout button. For some reason the token did not delete itself after I had logged out. JAmes walked me through the logic of what I could do to solve it. We spent about half an hour and when James said that I tried to create another source of truth for the token instead of just leaving the auth as the single source of truth everything just clicked! I was happy that I was able to recieve a walkthrough with what to do as it really helped me understand more of the project, especially the authentication part.
+
+
 ## January 25th 
 
 - Unit tests
