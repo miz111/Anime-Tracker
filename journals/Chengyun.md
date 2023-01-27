@@ -146,8 +146,37 @@ I found a 422 validation error. It is basically due to missing value. Found that
 - Focus on frontend:
 During the application of authentication. I broke the watch list page. Need to fix the issue of rendering. Still get 405 errors Method not allowed. This might be due to wrong url.
 Test function built. May need to clarify whether the test_create is enough or should I test more.
+<br>
 
 #### Date: 2023-01-23
 - Focus on frontend:
 Jess and Jordan started working on the deployment.
 Check with Jordan regarding the list view. I fixed the 405 error today. We also got suggested to simplify the token part. The wishlist page now with a simpler hooks. Test the connection from frontend. The token and list works now.
+<br>
+
+#### Date: 2023-01-24
+- Focus on frontend:
+The team work together to check merge and the deployment.
+We encountered some issue with the watchlist file. I mistakenly use a lowercase in the file and eventually become an issue on the Mac systems. Jess and I work to gether to solve this part together. We eventually fix this part.
+Unfortunately, we used up our CI/CD minutes, so we cannot keep testing.
+<br>
+
+#### Date: 2023-01-25
+- Focus on deployment:
+The whole team work together to dissolve the merge conflict and make all codes work again. We fixes few conflicts together. Alvi help the merge commands
+Most of fornt-end is merged and deployment works. We tested some functions.
+I create a new branch to clean the code for my part and also edit the frontend a bit to make sure the button work correctly.
+When I push to the git, I noticed the pipeline failed. I fix the bug quickly.
+<br>
+
+#### Date: 2023-01-26
+- Focus on debugging and deployment:
+I merged the branch again after edit and check if the button worked as expected. Test those functions to see if anything is broken by the ned code. Everything in watchlist service seems working for now. Still seem some info there. Will try to understand those and fix it. Need to post UI and the deployment status in the group channel.
+<br>
+
+
+#### Date: 2023-01-27
+- Wrapping up:
+The deadline is today. We will go through the available functions and test them again if anything changes.
+We make some new merges to implement the logout function and most of them works. Updated journal.
+<br>
