@@ -1,11 +1,11 @@
-## January 26th
+## January 26th, 2023
 
 - Frontend Fixes (Logout button token)
 
 Today I recieved help from James to solve an issue I was recieving from my logout button. For some reason the token did not delete itself after I had logged out. JAmes walked me through the logic of what I could do to solve it. We spent about half an hour and when James said that I tried to create another source of truth for the token instead of just leaving the auth as the single source of truth everything just clicked! I was happy that I was able to recieve a walkthrough with what to do as it really helped me understand more of the project, especially the authentication part.
 
 
-## January 25th 
+## January 25th, 2023
 
 - Unit tests
 - Read Me
@@ -13,7 +13,7 @@ Today I recieved help from James to solve an issue I was recieving from my logou
 
 Today I asked my team to help me complete my unit tests. Alvi primarily helped me with the logic behind the unit tests and how to fix it. We successfully completed the unit tests. I also worked on taking the wireframes form the excalidraw we created so that we can input them in our Read Me. We as a team specifically Alvi and Jess helped me merge into the main branch. We spend a lot of time waiting for the pipeline to complete. After the third attentance token I had an error that my token was not following me when I signed in and edited after merging and deploying. I shared my screen with the team to see what the problem could be. We spent close to an hour trying to figure the cause of the problem so I reached out to a seir to help me with 401 error I was gettign everytime I changed my profile information. We spent about half an hour assessing what the problem could be and Robbie helped me solve the problem with a few tiny changes in the code so I was estatic! 
 
-## January 24th 
+## January 24th, 2023
 
 - Frontend Forms(Refactoring)
 - Unit Tests
@@ -21,7 +21,7 @@ Today I asked my team to help me complete my unit tests. Alvi primarily helped m
 Today I updated my team with my progress, I was able to complete the sign up form to redirect to the features page instead of the login page.  I need to refactor all of the forms I had done since there was a lot of unused code. I communicated with Cheng today about setting up my unit test. I also shared my screen to get help from Jess and Cheng on completing my unit test. 
 
 
-## January 23rd 
+## January 23rd, 2023
 
 - Frontend Forms (sign up form) 
 
