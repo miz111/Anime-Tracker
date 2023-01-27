@@ -155,3 +155,82 @@ Today, I worked on:
 - Debugged for Jordan's frontend
 
 Today, I wrote the frontend auth and tested it with the login form. Since Tommy was having struggles coming up with the auth, and Jordan and Chengyun need the frontend auth set up to test their own features, I decided to take over that story to alleviate his load. I was able to successfully incorporate that with login successfully; I could see the cookie being generated. I then gave my code to Jordan to test his code. I was able to help him debug and solve 4 errors! We then tried to use Andrew's snippet to grab the user_id from the token. With Carter and Matt's help, we were still stuck because we were not supposed to have an async function inside a useeffect. Tomorrow, we will continue to tackle that so that we can test his code. We will also merge my code and look into CapRover.
+
+## January 19, 2022:
+
+Today, I worked on:
+
+- Implemented code to hide login button in nav bar after user logs in
+- Helped Jordan and Chengyun debug on the frontend (token decoding)
+
+Today, during standup, we saw that Alvi had made massive progress; on the other hand, Tommy's sign up form doesn't work, and he did not know how to test to see whether his form was working or not. For example, he did not know that he should check his database to see if the account was created successfully, and he did not know how to look for the cookie under Application. (He also did not know how to import, implement CSS, set router path in App.js. We are one week away from the due date of the project, and today we found out he did not know he had to use Swagger Docs. He also did not understand the url paths he was supposed to use on the frontend. He seems not to understand any of his own and expects Jordan and I to just fix his bugs for him. For example, he doesn't know how to read error logs, which tells you the file and line of code the error occurs in. He is unable to explain his lines of code or the variables he's using. He just pulls up his code and stays quiet, waiting for us to give him the answer.
+Again, today, the three of us (me, Jordan, and Chengyun) debugged until 7 together with Carter's help, and we were finally able to implement Andrew's code to decode the JWT token.
+
+## January 20, 2022:
+
+Today, I worked on:
+
+- Writing Unit Test
+
+Because I have been helping my teammates so much for the past few days, I still haven’t gotten to write my unit test yet! So today, I decided to focus on writing the unit test. I rewatched Jame’s lecture recording and wrote a test for a post request in the accounts service. However, I kept getting a 422 Error. I asked for Matt’s help. We worked at it for 2 hours, but unfortunately, we weren’t able to solve the issue. We speculate that there may be some underlying tests for the hash password that’s causing the actual results to render differently than what was expected. I will be writing a GET request instead.
+
+## January 21, 2022:
+
+Today, I worked on:
+
+- Fixed backend so that Delete, Edit, and Get detail backends are restricted by the token
+- Wrote a unit test for accounts get all endpoint
+
+I finally wrote a unit test that passes! I did discuss with Jordan some concerns about the unit test. Because the get all expects a list of accounts to be returned, and there is no data to begin with, I set the returned value to an empty list. But I’m not sure about the test because once someone creates a new account, the get-all will no longer be empty.
+
+I also realized on Swagger Docs that my endpoints for edit, delete, and get detail were not protected. This means that everyone could access those endpoints without logging in beforehand. I went back and revised my code to change this, and it took debugging for a couple of hours with Jordan before I fixed all of the bugs. Now, those endpoints will be protected.
+
+## January 22, 2022:
+
+Today, I worked on:
+
+- Wrote another unit test for accounts as practice
+- Attempted to deploy our services on CapRover
+
+Today, I wrote another test for getting all accounts. Instead of returning an empty list, I set the current database to be the expected returned values, and the test passed. Jordan and I collaborated together, and we checked Tommy’s commits on GitLab. We found that he had changed some things to the front-end auth in attempt to make his code work. That was not okay because he did not run that by us, and that could potentially break the login functionality that I wrote. He also deleted my return statement in my login function, so that means my login wouldn’t work anymore. In addition, he also asked for help on his bug today. He screenshotted his code to the chat and just waited for us to tell him what to change. When we asked him about parts of his code, he is unable to explain what he was trying to accomplish. He can’t explain any of his own code! I also find it interesting that he was mentioning his logout doesn’t work, even though I already could tell that he wasn’t logged in to begin with since he had broken my login function. Since we literally have five days left, we, collectively as a group, has agreed that if his code does not work, we will reject his merge request.
+
+I also watched Andrew’s recording on CapRover today. I have the instance set up and tried to follow along for deployment. But I think I am missing something because I am running into a 1107 error. I tried to see if anyone else ran into a similar error, and Steven did, but it is still unresolved. I will have to ask for help tomorrow.
+
+## January 23, 2022:
+
+Today, I worked on:
+
+- Composed the Git -ci-yml file for the accounts service
+- Fixed all current pipeline issues
+- created first merge request
+
+Today, with the help of Matt, I merged my branch with all of my code into main. This includes the backend for accounts, backend and frontend authentication, frontend login form, and my unit test. We then set up accounts service for caprover just to see how it works; I had to make multiple merge requests to fix each error. I also reformatted my files with black and flake8. We were able to get the deployed website up, but the endpoints don’t work yet. So that will be an issue for tomorrow.
+
+## January 24, 2022:
+
+Today, I worked on:
+
+- Wrote code for git - ci-yml for the other two services: watchlists and favorites.
+- Helped my teammate troubleshoot their unit tests
+- Helped teammates merge their branches in
+
+Today, I was mostly helping my teammates create their merge requests and resolve merge conflicts. I also wrote the code for the other two services for them to be deployed. Unfortunately, by the time we had finished merging Jordan and Chengyun’s code, we had ran out of pipeline minutes, so I was not able to work on it further today.
+
+## January 25, 2022:
+
+Today, I worked on:
+
+- Helped my teammates merge their dev branches into main
+- Tested functionality of deployed site
+- Fixed Cors issues
+
+Today, we merged everyone’s branches into main. There were some hiccups, and the whole process took a few hours. Surprisingly, most of our endpoints work except for one. I also fixed a couple of cors issues with Andrew’s help. Tomorrow, we will fix up the nav bar. There are some organizational issues that can be cleaned up.
+
+## January 26, 2022:
+
+Today, I worked on:
+
+- Checked functionality of deployed site
+- Verified that my assigned stories on GitLab are complete
+
+Today, our team was basically wrapping up. We checked our deploy site for our functionality. There are hiccups on the logout not destroying the token and the anime detail page not working, but we got those fixed. I also learned that there’s a limit to image storage on CapRover, and I had to go on CapRover to delete some old images that weren’t in use before our main pipeline went through.
