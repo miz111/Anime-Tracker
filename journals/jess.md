@@ -234,3 +234,7 @@ Today, I worked on:
 - Verified that my assigned stories on GitLab are complete
 
 Today, our team was basically wrapping up. We checked our deploy site for our functionality. There are hiccups on the logout not destroying the token and the anime detail page not working, but we got those fixed. I also learned that there’s a limit to image storage on CapRover, and I had to go on CapRover to delete some old images that weren’t in use before our main pipeline went through.
+
+## February 27, 2022:
+
+Completed repo transfer from GitLab to GitHub.
